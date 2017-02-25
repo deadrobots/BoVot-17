@@ -7,6 +7,7 @@ from wallaby import enable_servos, msleep, seconds
 
 def init():
     u.move_servo(c.servoClaw, c.clawOpen, 100)
+    print "This is init"
     u.move_servo(c.servoArm, c.armDown, 100)
     u.move_servo(c.outrigger, c.outriggerIn, 10)
     #u.move_servo(c.servoCow,c.cowMid,100)
@@ -15,11 +16,13 @@ def init():
     c.startTime = seconds()
 
 def getBotGuy():
-    x.drive_speed(28.5, 100)
-    x.rotate(90, 50)
+    x.drive_speed(13.75, 50)
+    x.rotate(-86, 50)
+    u.move_servo(c.outrigger, c.outriggerSafe, 10)
+    x.drive_speed(33, 100)
+    x.rotate(85, 50)
     u.move_servo(c.servoArm, c.armBotguy, 10)
-    u.move_servo(c.outrigger, c.outriggerMid, 10)
-    x.drive_speed(16, 100)
+    x.drive_speed(30,100) #Check for moving over bump. Possible change for later.
     u.move_servo(c.servoArm, c.armDown, 10)
     msleep(300)
     u.move_servo(c.servoClaw, c.clawClose, 10)
@@ -28,7 +31,6 @@ def getBotGuy():
     x.drive_speed(7, -20)
     u.move_servo(c.outrigger, c.outriggerIn, 10)
     msleep(300)
-    u.DEBUG()
     u.move_servo(c.servoArm, c.armUpBotguy, 10)
 
 def goToCow():

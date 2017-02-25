@@ -42,6 +42,7 @@ def DEBUGwithWait():
     ao()
     print 'Program stop for DEBUG\nSeconds: ', seconds() - c.startTime
     msleep(5000)
+    exit(0)
 
 # Servo Constants
 DELAY = 10

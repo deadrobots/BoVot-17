@@ -36,13 +36,14 @@ cowDown = 2047
 cowMid = 1700
 cowUp = 800
 
-clawClose = 930
-clawOpen = 1800
+clawClose = 550
+clawOpen = 1400
 
 cowClawOpen = 400
 cowClawClose = 1550
 
 outriggerMid = 1605
+outriggerSafe = 1250
 outriggerIn = 1950
 outriggerOut = 430
 
