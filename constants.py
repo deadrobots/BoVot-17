@@ -21,9 +21,10 @@ isClone = w.digital(CLONE_SWITCH)
 
 # Servos
 servoArm = 0
-servoCow = 1
+outrigger = 1
 servoClaw = 2
 servoCowClaw = 3
+
 
 
 armUp = 580
@@ -40,6 +41,10 @@ clawOpen = 1800
 
 cowClawOpen = 400
 cowClawClose = 1550
+
+outriggerMid = 1605
+outriggerIn = 1950
+outriggerOut = 430
 
 #Tophat values
 FRONT_TOPHAT = 0
