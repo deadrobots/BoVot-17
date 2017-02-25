@@ -1,1 +1,2 @@
-# Lego-17
+# BoVot-17
+Robot to grab BotGuy and two cows.
