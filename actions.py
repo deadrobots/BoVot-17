@@ -1,17 +1,17 @@
 import motorsPlusPlus as x
 import utils as u
 import constants as c
-from wallaby import enable_servos, msleep, seconds
+from wallaby import enable_servos, msleep, seconds, analog, motor
 
 
 
 def init():
+    print "init"
     if c.isClone:
         print "i am clone"
     else:
         print "i am prime"
     u.move_servo(c.servoClaw, c.clawOpen, 100)
-    print "This is init"
     u.move_servo(c.servoArm, c.armDown, 100)
     u.move_servo(c.outrigger, c.outriggerIn, 10)
     #u.move_servo(c.servoCow,c.cowMid,100)
@@ -20,6 +20,7 @@ def init():
     c.startTime = seconds()
 
 def getBotGuy():
+    print "getBotGuy"
     x.drive_speed(13.75, 50)
     x.rotate(-86, 50)
     u.move_servo(c.outrigger, c.outriggerSafe, 10)
@@ -28,21 +29,26 @@ def getBotGuy():
         x.rotate(90,50)
     else:
         x.drive_speed(33, 100)
-        x.rotate(85, 50)
+        x.rotate(90, 50)
     u.move_servo(c.servoArm, c.armBotguy, 10)
+
     x.drive_speed(30,100) #Check for moving over bump. Possible change for later.
     u.move_servo(c.servoArm, c.armDown, 10)
     msleep(300)
     u.move_servo(c.servoClaw, c.clawClose, 10)
     msleep(500)
     u.move_servo(c.servoArm, c.armUp, 10)
-    x.drive_speed(7, -20)
-    u.DEBUG()
+    if c.isClone:
+        x.drive_speed(7,-20)
+        u.move_servo(c.servoArm, c.armUpBotguy, 10)
+    else:
+        x.drive_speed(7, -20)
     u.move_servo(c.outrigger, c.outriggerIn, 10)
     msleep(300)
     u.move_servo(c.servoArm, c.armUpBotguy, 10)
 
 def goToCow():
+    print "goToCow"
     msleep(300)
     #u.move_servo(c.servoCow, c.cowUp, 10)
     msleep(300)
@@ -50,15 +56,27 @@ def goToCow():
     x.rotate(-90, 20)
     x.drive_speed(14, 50)
     x.rotate(185, 20)
-    x.drive_speed(2, 50)
-    u.DEBUG()
-    x.drive_speed(9, -50)
+    x.drive_speed(2, -50)
+    u.move_servo(c.outrigger, c.outriggerOut, 10 )
+
+
+def findCow():
+    u.move_servo(c.servoCowClaw, c.cowClawOpen, 10)
+    motor(c.COWMOTOR, -15)
+    msleep(1000)
+    time = seconds() + 3.0
+    while (seconds() < time):
+        if (analog(0) < 1000):
+            x._drive(-30,-50)
+        else:
+            x._drive(-50,-30)
+    u.DEBUGwithWait()
 
 def grabCowAndGo():
-    u.move_servo(c.servoCowClaw, c.cowClawOpen, 10)
-    msleep(500)
-    #u.move_servo(c.servoCow, c.cowDown, 10)
-    msleep(1000)
+    print "grabCowAndGo"
+
+
+
     u.move_servo(c.servoCowClaw, c.cowClawClose, 10)
     u.waitForButton()
     #u.move_servo(c.servoCow, c.cowUp,10)
@@ -66,6 +84,7 @@ def grabCowAndGo():
     x.drive_speed(34, 100)
 
 def toOtherSide():
+    print "toOtherSide"
     x.rotate(-79, 50)
     x.drive_speed(30, 50)
     x.drive_speed(-5, 50)
@@ -83,6 +102,7 @@ def toOtherSide():
     u.DEBUGwithWait()
 
 def upRamp():
+    print "upRamp"
     x.rotate(25, 50)
     x.drive_speed(36, 100)
     x.drive_speed(6, -50)
@@ -98,6 +118,7 @@ def upRamp():
     x.rotate(-45, 50)
 
 def test():
+    print "test"
     #u.move_servo(c.servoArm, c.armUp, 20)
     x.drive_speed(50,55)
 

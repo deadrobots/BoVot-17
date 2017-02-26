@@ -11,6 +11,7 @@ startTime = -1
 # Motor ports
 LMOTOR = 0
 RMOTOR = 3
+COWMOTOR = 1
 
 # Digital ports
 CLONE_SWITCH = 9
@@ -27,17 +28,17 @@ servoCowClaw = 3
 
 
 
-armUp = 1000
-armUpBotguy = 0
-armBotguy = 530
-armDown = 1900
+armUp = 1350
+armUpBotguy = 800
+armBotguy = 1700
+armDown = 1700
 
 cowDown = 2047
 cowMid = 1700
 cowUp = 1250
 
-clawClose = 550
-clawOpen = 1150
+clawClose = 950
+clawOpen = 2047
 
 cowClawOpen = 400
 cowClawClose = 1550
@@ -45,7 +46,7 @@ cowClawClose = 1550
 outriggerMid = 1605
 outriggerSafe = 1250
 outriggerIn = 1950
-outriggerOut = 930
+outriggerOut = 450
 
 #Tophat values
 FRONT_TOPHAT = 0
@@ -58,7 +59,7 @@ if isClone:
     servoClaw = 2
     servoCowClaw = 3
 
-    armUp = 1600
+    armUp = 1500
     armUpBotguy = 900
     armBotguy = 1700
     armDown = 1900

@@ -9,6 +9,7 @@ def main():
     act.init()
     act.getBotGuy()
     act.goToCow()
+    act.findCow()
     act.grabCowAndGo()
     if seeding:
         act.toOtherSide()
