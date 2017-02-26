@@ -28,11 +28,13 @@ from wallaby import set_servo_position
 # Drive Constants
 INCHES_TO_TICKS = 172#169   #205 - 161     #156#127#50 cm #265
 WHEEL_DISTANCE = 4.25 #205 - 4.25  # Distance between the two wheels
-
-lAdjust = 1.08 # adjust left wheel counter to fix drift
+ADJUST = 1.08 # adjust left wheel counter to fix drift
 
 if isClone:
-    INCHES_TO_TICKS = 190
+    # Drive Constants
+    INCHES_TO_TICKS = 165  # 169   #205 - 161     #156#127#50 cm #265
+    WHEEL_DISTANCE = 4.25  # 205 - 4.25  # Distance between the two wheels
+    ADJUST = 0.98  # adjust left wheel counter to fix drift
 
 
 # Motor Control #
@@ -56,7 +58,7 @@ def _right_ticks():  # Returns the right motor's tick count.
 
 
 def _left_ticks():  # Returns the left motor's tick count.
-    return abs(get_motor_position_counter(LMOTOR)* lAdjust)
+    return abs(get_motor_position_counter(LMOTOR) * ADJUST)
 
 
 def _clear_ticks():  # Clears the motor ticks.

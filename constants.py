@@ -27,17 +27,17 @@ servoCowClaw = 3
 
 
 
-armUp = 580
+armUp = 1000
 armUpBotguy = 0
 armBotguy = 530
-armDown = 920
+armDown = 1900
 
 cowDown = 2047
 cowMid = 1700
-cowUp = 800
+cowUp = 1250
 
 clawClose = 550
-clawOpen = 1400
+clawOpen = 1150
 
 cowClawOpen = 400
 cowClawClose = 1550
@@ -45,8 +45,39 @@ cowClawClose = 1550
 outriggerMid = 1605
 outriggerSafe = 1250
 outriggerIn = 1950
-outriggerOut = 430
+outriggerOut = 930
 
 #Tophat values
 FRONT_TOPHAT = 0
 frontLineFollowerGrey = 1300
+
+if isClone:
+    # Servos
+    servoArm = 0
+    outrigger = 1
+    servoClaw = 2
+    servoCowClaw = 3
+
+    armUp = 1600
+    armUpBotguy = 900
+    armBotguy = 1700
+    armDown = 1900
+
+    cowDown = 2047
+    cowMid = 1700
+    cowUp = 1250
+
+    clawClose = 900
+    clawOpen = 1900
+
+    cowClawOpen = 400
+    cowClawClose = 1550
+
+    outriggerMid = 1605
+    outriggerSafe = 1250
+    outriggerIn = 1950
+    outriggerOut = 930
+
+    # Tophat values
+    FRONT_TOPHAT = 0
+    frontLineFollowerGrey = 1300

@@ -13,6 +13,9 @@ def main():
     if seeding:
         act.toOtherSide()
     act.upRamp()
-
+    #act.test()
 if __name__ == "__main__":
+    import os
+    import sys
+    sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', 0)
     main()

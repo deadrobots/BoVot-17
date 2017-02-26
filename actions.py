@@ -6,6 +6,10 @@ from wallaby import enable_servos, msleep, seconds
 
 
 def init():
+    if c.isClone:
+        print "i am clone"
+    else:
+        print "i am prime"
     u.move_servo(c.servoClaw, c.clawOpen, 100)
     print "This is init"
     u.move_servo(c.servoArm, c.armDown, 100)
@@ -19,8 +23,12 @@ def getBotGuy():
     x.drive_speed(13.75, 50)
     x.rotate(-86, 50)
     u.move_servo(c.outrigger, c.outriggerSafe, 10)
-    x.drive_speed(33, 100)
-    x.rotate(85, 50)
+    if c.isClone:
+        x.drive_speed(31.5, 100)
+        x.rotate(90,50)
+    else:
+        x.drive_speed(33, 100)
+        x.rotate(85, 50)
     u.move_servo(c.servoArm, c.armBotguy, 10)
     x.drive_speed(30,100) #Check for moving over bump. Possible change for later.
     u.move_servo(c.servoArm, c.armDown, 10)
@@ -29,6 +37,7 @@ def getBotGuy():
     msleep(500)
     u.move_servo(c.servoArm, c.armUp, 10)
     x.drive_speed(7, -20)
+    u.DEBUG()
     u.move_servo(c.outrigger, c.outriggerIn, 10)
     msleep(300)
     u.move_servo(c.servoArm, c.armUpBotguy, 10)
@@ -87,6 +96,10 @@ def upRamp():
     u.move_servo(c.servoCow, c.cowDown, 10)
     msleep(300)
     x.rotate(-45, 50)
+
+def test():
+    #u.move_servo(c.servoArm, c.armUp, 20)
+    x.drive_speed(50,55)
 
 
     print "Seconds elapsed: " + seconds() - c.startTime
