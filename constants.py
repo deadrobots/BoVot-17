@@ -30,7 +30,7 @@ servoCowClaw = 3
 
 armUp = 1350
 armUpBotguy = 800
-armUpLineFollow = 445
+armUpLineFollow = 550
 armBotguy = 1700
 armDown = 1700
 
@@ -47,7 +47,7 @@ cowClawClose = 1500
 outriggerMid = 1605
 outriggerSafe = 1250
 outriggerIn = 1950
-outriggerOut = 450
+outriggerOut = 370
 
 #Tophat values
 FRONT_TOPHAT = 0
