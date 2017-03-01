@@ -30,6 +30,7 @@ servoCowClaw = 3
 
 armUp = 1350
 armUpBotguy = 800
+armUpLineFollow = 445
 armBotguy = 1700
 armDown = 1700
 
@@ -41,7 +42,7 @@ clawClose = 950
 clawOpen = 2047
 
 cowClawOpen = 400
-cowClawClose = 1550
+cowClawClose = 1500
 
 outriggerMid = 1605
 outriggerSafe = 1250

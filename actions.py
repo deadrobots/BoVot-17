@@ -2,7 +2,7 @@ import motorsPlusPlus as x
 import utils as u
 import constants as c
 from wallaby import enable_servos, msleep, seconds, analog, motor
-
+from wallaby import *
 
 
 def init():
@@ -19,19 +19,23 @@ def init():
     u.waitForButton()
     c.startTime = seconds()
 
+
 def getBotGuy():
     print "getBotGuy"
     x.drive_speed(13.75, 50)
-    x.rotate(-86, 50)
-    u.move_servo(c.outrigger, c.outriggerSafe, 10)
+    x.rotate(-84, 50)
+
+    #u.move_servo(c.outrigger, c.outriggerSafe, 10)
     if c.isClone:
         x.drive_speed(31.5, 100)
         x.rotate(90,50)
     else:
-        x.drive_speed(33, 100)
+        x.drive_speed(35, 100)
+        print "time to rotate"
         x.rotate(90, 50)
+    u.move_servo(c.outrigger, c.outriggerSafe, 10)
     u.move_servo(c.servoArm, c.armBotguy, 10)
-
+    msleep(300)
     x.drive_speed(30,100) #Check for moving over bump. Possible change for later.
     u.move_servo(c.servoArm, c.armDown, 10)
     msleep(300)
@@ -61,24 +65,27 @@ def goToCow():
 
 
 def findCow():
+    u.move_servo(c.servoArm, c.armUpLineFollow, 10)
     u.move_servo(c.servoCowClaw, c.cowClawOpen, 10)
-    motor(c.COWMOTOR, -15)
+    motor(c.COWMOTOR, -10)
     msleep(1000)
+
     time = seconds() + 3.0
     while (seconds() < time):
         if (analog(0) < 1000):
             x._drive(-30,-50)
         else:
             x._drive(-50,-30)
-    u.DEBUGwithWait()
+
 
 def grabCowAndGo():
     print "grabCowAndGo"
-
-
+    motor(c.COWMOTOR,10)
+    msleep(2000)
 
     u.move_servo(c.servoCowClaw, c.cowClawClose, 10)
-    u.waitForButton()
+    u.DEBUGwithWait()
+    #u.waitForButton()
     #u.move_servo(c.servoCow, c.cowUp,10)
     msleep(300)
     x.drive_speed(34, 100)

@@ -1,10 +1,12 @@
 #!/usr/bin/python
 
 import actions as act
+import utils as u
 
 seeding = True
 
 def main():
+
     print "running"
     act.init()
     act.getBotGuy()
