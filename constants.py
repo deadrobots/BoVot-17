@@ -77,7 +77,7 @@ if isClone:
 
     outriggerMid = 1605
     outriggerSafe = 1250
-    outriggerIn = 1950
+    outriggerIn = 1800
     outriggerOut = 930
 
     # Tophat values

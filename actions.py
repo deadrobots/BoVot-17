@@ -12,7 +12,7 @@ def init():
     else:
         print "i am prime"
     u.move_servo(c.servoClaw, c.clawOpen, 100)
-    u.move_servo(c.servoArm, c.armDown, 100)
+    u.move_servo(c.servoArm, c.armUpBotguy, 100)
     u.move_servo(c.outrigger, c.outriggerIn, 10)
     #u.move_servo(c.servoCow,c.cowMid,100)
     enable_servos()
@@ -22,13 +22,12 @@ def init():
 
 def getBotGuy():
     print "getBotGuy"
-    x.drive_speed(13.75, 50)
-    x.rotate(-81, 50)
-
+    x.drive_speed(20, 50)
+    x.rotate(-44, 25)
     #u.move_servo(c.outrigger, c.outriggerSafe, 10)
     if c.isClone:
-        x.drive_speed(31.5, 100)
-        x.rotate(90,50)
+        x.drive_speed(18, 100)
+        x.rotate(95,50)
     else:
         x.drive_speed(34, 100)
         print "time to rotate"
@@ -37,14 +36,15 @@ def getBotGuy():
     u.move_servo(c.servoArm, c.armBotguy, 10)
     msleep(300)
     x.drive_speed(30,100) #Check for moving over bump. Possible change for later.
-    u.move_servo(c.servoArm, c.armDown, 10)
+    u.move_servo(c.servoArm, c.armDown-100, 10)
+    msleep(200)
+    u.move_servo(c.servoClaw, c.clawClose, 100)
     msleep(300)
-    u.move_servo(c.servoClaw, c.clawClose, 10)
-    msleep(500)
     u.move_servo(c.servoArm, c.armUp, 10)
     if c.isClone:
         x.drive_speed(7,-20)
         u.move_servo(c.servoArm, c.armUpBotguy, 10)
+        u.DEBUG()
     else:
         x.drive_speed(7, -20)
     u.move_servo(c.outrigger, c.outriggerIn, 10)
