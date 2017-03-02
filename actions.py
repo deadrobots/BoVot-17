@@ -77,7 +77,7 @@ def findCow():
             x._drive(-30,-50)
         else:
             x._drive(-50,-30)
-    x.drive(0,0)
+    x._drive(0,0)
     u.DEBUGwithWait()
 def grabCowAndGo():
     print "grabCowAndGo"
@@ -128,7 +128,8 @@ def upRamp():
 def test():
     print "test"
     #u.move_servo(c.servoArm, c.armUp, 20)
-    x.drive_speed(50,55)
+    #x.drive_speed(50,55)
+    x.rotate(90,50)
 
 
     print "Seconds elapsed: " + seconds() - c.startTime

@@ -8,6 +8,7 @@ seeding = True
 def main():
 
     print "running"
+    '''
     act.init()
     act.getBotGuy()
     act.goToCow()
@@ -16,7 +17,9 @@ def main():
     if seeding:
         act.toOtherSide()
     act.upRamp()
-    #act.test()
+    '''
+    print"Test"
+    act.test()
 if __name__ == "__main__":
     import os
     import sys
