@@ -44,7 +44,7 @@ def getBotGuy():
     if c.isClone:
         x.drive_speed(7,-20)
         u.move_servo(c.servoArm, c.armUpBotguy, 10)
-        u.DEBUG()
+
     else:
         x.drive_speed(7, -20)
     u.move_servo(c.outrigger, c.outriggerIn, 10)
@@ -55,18 +55,23 @@ def goToCow():
     print "goToCow"
     msleep(300)
     #u.move_servo(c.servoCow, c.cowUp, 10)
+
     msleep(300)
     x.drive_speed(5, -50)
     x.rotate(-90, 20)
     x.drive_speed(14, 50)
     x.rotate(187, 20)
     x.drive_speed(2, -50)
-    u.move_servo(c.outrigger, c.outriggerOut, 10 )
-
+    u.move_servo(c.outrigger, c.outriggerFront, 10 )
 
 def findCow():
+    print "findCow"
     u.move_servo(c.servoArm, c.armUpLineFollow, 10)
     u.move_servo(c.servoCowClaw, c.cowClawOpen, 10)
+    u.move_servo_on_white(c.outrigger, c.outriggerOut, 5)
+    print"rotate twoward black"
+    x.pivot_left_condition(-50, u.onBlackFront, False)
+    u.DEBUGwithWait()
     motor_power(c.COWMOTOR, -50)
     msleep(500)
     motor_power(c.COWMOTOR,-10)
@@ -79,6 +84,8 @@ def findCow():
             x._drive(-50,-30)
     x._drive(0,0)
     u.DEBUGwithWait()
+
+
 def grabCowAndGo():
     print "grabCowAndGo"
     motor_power(c.COWMOTOR,10)

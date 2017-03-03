@@ -16,7 +16,9 @@ from wallaby import seconds
 from wallaby import freeze
 from wallaby import set_servo_position
 from wallaby import get_servo_position
+from wallaby import analog
 import drive as d
+from motorsPlusPlus import rotate
 import wallaby as w
 
 def waitForButton():
@@ -44,6 +46,7 @@ def DEBUGwithWait():
     msleep(5000)
     exit(0)
 
+
 # Servo Constants
 DELAY = 10
 
@@ -70,6 +73,28 @@ def move_servo(servo, endPos, speed=10):  # Moves a servo with increment "speed"
     set_servo_position(servo, endPos)
     msleep(DELAY)
 
+def move_servo_on_white(servo, endPos, speed=10):  # Moves a servo with increment "speed".
+    # speed of 1 is slow
+    # speed of 2000 is fast
+    # speed of 10 is the default
+    now = get_servo_position(servo)
+    if speed == 0:
+        speed = 2047
+    if endPos >= 2048:
+        print "Programmer Error"
+        exit(0)
+    if endPos < 0:
+        print "Programmer Error"
+        exit(0)
+    if now > endPos:
+        speed = -speed
+    for i in range(int(now), int(endPos), int(speed)):
+        set_servo_position(servo, i)
+        msleep(DELAY)
+        if analog(c.FRONT_TOPHAT) > 1500:
+            rotate(20, 25)
+    set_servo_position(servo, endPos)
+    msleep(DELAY)
 
 def move_servo_timed(servo, endPos, time):  # Moves a servo over a specific time.
     if time == 0:
@@ -150,6 +175,7 @@ def lineFollowRightSmoothCount(amount):
 
 def timedLineFollowLeftSmooth(time):
     sec = seconds() + time
+
     while seconds() < sec:
         if onBlackFront():
             d.driveTimed(20, 40, 20)

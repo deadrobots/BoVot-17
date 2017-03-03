@@ -48,6 +48,7 @@ outriggerMid = 1605
 outriggerSafe = 1250
 outriggerIn = 1950
 outriggerOut = 370
+outriggerFront = 60 #NEEDS TO BE ADJUSTED FOR PRIME
 
 #Tophat values
 FRONT_TOPHAT = 0
@@ -78,7 +79,8 @@ if isClone:
     outriggerMid = 1605
     outriggerSafe = 1250
     outriggerIn = 1800
-    outriggerOut = 930
+    outriggerOut = 370
+    outriggerFront = 0
 
     # Tophat values
     FRONT_TOPHAT = 0

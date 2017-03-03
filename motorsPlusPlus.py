@@ -102,7 +102,7 @@ def arc_radius(angle, turnRadius, speed):  # Turns the robot "angle" degrees by 
         print smallTicks
         print largeTicks
         print smallTicks / largeTicks
-        print smallSpeed
+        print smallSpeed# Drives while "testFunction" returns "state" | an example would be: x.drive_condition(50, 50, x.getWait)
         print largeSpeed
         while _right_ticks() <= largeTicks:
             if (_right_ticks() / largeTicks) == (_left_ticks() / smallTicks):
@@ -158,7 +158,7 @@ def drive_timed(lmotor, rmotor, time):
         if int(_left_ticks() / mod) > int(_right_ticks() / mod):
             _drive(int(newLeftSpeed / 1.3), newRightSpeed)
     freeze_motors()
-    print get_motor_position_counter(RMOTOR)
+print get_motor_position_counter(RMOTOR)
 
 
 def drive_condition(lmotor, rmotor, testFunction,
@@ -166,7 +166,8 @@ def drive_condition(lmotor, rmotor, testFunction,
     print "driving under condition"
     _clear_ticks()
     if lmotor == 0 or rmotor == 0:
-        print "please use pivot instead!"
+        print "this won't work! please use pivot_right_condition or pivot_left_condition instead!"
+        exit(0)
 
     elif abs(rmotor) <= abs(lmotor):
         mod = rmotor / (lmotor * 1.0)
@@ -219,6 +220,11 @@ def pivot_right(deg, speed):  # Pivots by moving the right wheel.
         pass
     freeze_motors()
 
+def pivot_right_condition(speed, testFunction, state=True):  # Pivots by moving the right wheel.
+    _drive(0, speed)
+    while testFunction() is state:
+        pass
+    freeze_motors()
 
 def pivot_left(deg, speed):  # Pivots by moving the left wheel.
     if deg < 0:
@@ -234,3 +240,8 @@ def pivot_left(deg, speed):  # Pivots by moving the left wheel.
         pass
     freeze_motors()
 
+def pivot_left_condition(speed, testFunction, state=True):  # Pivots by moving the left wheel.
+    _drive(speed, 0)
+    while testFunction() is state:
+        pass
+    freeze_motors()
