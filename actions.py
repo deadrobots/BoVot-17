@@ -14,7 +14,7 @@ def init():
     u.move_servo(c.servoClaw, c.clawOpen, 100)
     u.move_servo(c.servoArm, c.armUpBotguy, 100)
     u.move_servo(c.outrigger, c.outriggerIn, 10)
-    #u.move_servo(c.servoCow,c.cowMid,100)
+    u.move_servo(c.servoCowClaw,c.cowClawStart,100)
     enable_servos()
     u.waitForButton()
     c.startTime = seconds()
@@ -26,12 +26,13 @@ def getBotGuy():
     x.rotate(-44, 25)
     #u.move_servo(c.outrigger, c.outriggerSafe, 10)
     if c.isClone:
-        x.drive_speed(18, 100)
-        x.rotate(95,50)
+        x.drive_speed(17.5, 80)
+        x.rotate(85,50)
     else:
         x.drive_speed(34, 100)
         print "time to rotate"
         x.rotate(90, 50)
+
     u.move_servo(c.outrigger, c.outriggerSafe, 10)
     u.move_servo(c.servoArm, c.armBotguy, 10)
     msleep(300)
@@ -51,6 +52,8 @@ def getBotGuy():
     msleep(300)
     u.move_servo(c.servoArm, c.armUpBotguy, 10)
 
+
+
 def goToCow():
     print "goToCow"
     msleep(300)
@@ -59,23 +62,29 @@ def goToCow():
     msleep(300)
     x.drive_speed(5, -50)
     x.rotate(-90, 20)
-    x.drive_speed(14, 50)
-    x.rotate(187, 20)
-    x.drive_speed(2, -50)
+    x.drive_speed(5, -80)
+    x.rotate(180, 25)
+    # u.DEBUGwithWait()
+    # x.drive_speed(14, 50)
+    # x.rotate(187, 20)
+    # x.drive_speed(2, -50)
     u.move_servo(c.outrigger, c.outriggerFront, 10 )
 
 def findCow():
     print "findCow"
     u.move_servo(c.servoArm, c.armUpLineFollow, 10)
+    x.drive_speed(12, -80)
     u.move_servo(c.servoCowClaw, c.cowClawOpen, 10)
     u.move_servo_on_white(c.outrigger, c.outriggerOut, 5)
     print"rotate twoward black"
-    x.pivot_left_condition(-50, u.onBlackFront, False)
-    u.DEBUGwithWait()
+    x.pivot_left_condition(25, u.onBlackFront, False)
     motor_power(c.COWMOTOR, -50)
     msleep(500)
-    motor_power(c.COWMOTOR,-10)
+    motor_power(c.COWMOTOR, -10)
     msleep(1000)
+    x.line_follow(20)
+    u.move_servo(c.servoCowClaw, c.cowDown, 10)
+    u.DEBUGwithWait()
     time = seconds() + 2.0
     while (seconds() < time):
         if (analog(0) < 1000):

@@ -23,6 +23,7 @@ from wallaby import get_servo_position
 from wallaby import motor
 from wallaby import msleep
 from wallaby import seconds
+from wallaby import analog
 from wallaby import set_servo_position
 
 # Drive Constants
@@ -245,3 +246,13 @@ def pivot_left_condition(speed, testFunction, state=True):  # Pivots by moving t
     while testFunction() is state:
         pass
     freeze_motors()
+
+def line_follow(distance):
+    _clear_ticks()
+    ticks = abs(INCHES_TO_TICKS * distance)
+    while _right_ticks() <= ticks:
+        if analog(0) >1500:
+            _drive(-40, -30)
+        else:
+            _drive(-30, -40)
+    _drive(0,0)

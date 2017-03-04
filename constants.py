@@ -43,6 +43,7 @@ clawOpen = 2047
 
 cowClawOpen = 400
 cowClawClose = 1500
+cowClawStart = 800
 
 outriggerMid = 1605
 outriggerSafe = 1250
@@ -79,7 +80,7 @@ if isClone:
     outriggerMid = 1605
     outriggerSafe = 1250
     outriggerIn = 1800
-    outriggerOut = 370
+    outriggerOut = 508
     outriggerFront = 0
 
     # Tophat values
