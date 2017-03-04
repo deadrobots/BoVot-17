@@ -34,10 +34,10 @@ def getBotGuy():
         x.rotate(90, 50)
 
     u.move_servo(c.outrigger, c.outriggerSafe, 10)
-    u.move_servo(c.servoArm, c.armBotguy, 10)
+    u.move_servo(c.servoArm, c.armDown, 10)
     msleep(300)
     x.drive_speed(30,100) #Check for moving over bump. Possible change for later.
-    u.move_servo(c.servoArm, c.armDown-100, 10)
+    #u.move_servo(c.servoArm, c.armDown-150, 10)
     msleep(200)
     u.move_servo(c.servoClaw, c.clawClose, 100)
     msleep(300)
@@ -82,9 +82,11 @@ def findCow():
     msleep(500)
     motor_power(c.COWMOTOR, -10)
     msleep(1000)
-    x.line_follow(20)
-    u.move_servo(c.servoCowClaw, c.cowDown, 10)
-    u.DEBUGwithWait()
+    x.line_follow(25)
+
+
+
+    ''''
     time = seconds() + 2.0
     while (seconds() < time):
         if (analog(0) < 1000):
@@ -92,25 +94,33 @@ def findCow():
         else:
             x._drive(-50,-30)
     x._drive(0,0)
-    u.DEBUGwithWait()
-
+'''
 
 def grabCowAndGo():
     print "grabCowAndGo"
-    motor_power(c.COWMOTOR,10)
-    msleep(2000)
-
     u.move_servo(c.servoCowClaw, c.cowClawClose, 10)
-    u.DEBUGwithWait()
+    motor_power(c.COWMOTOR, 40)
+    msleep(2000)
+    #u.move_servo(c.outrigger, c.outriggerLineFollow, 10)
+    #x.line_follow_forward_end(0)
+    #x.drive_speed(13,50)
+    u.move_servo(c.outrigger,c.outriggerInMore,10)
+
     #u.waitForButton()
     #u.move_servo(c.servoCow, c.cowUp,10)
-    msleep(300)
-    x.drive_speed(34, 100)
+    #msleep(300)
+    #x.drive_speed(34, 100)
 
 def toOtherSide():
     print "toOtherSide"
-    x.rotate(-79, 50)
-    x.drive_speed(30, 50)
+    x.drive_speed(4,-50)
+    x.change_adjust(True)
+    print("check me: " + str(x.ADJUST))
+    u.waitForButton()
+    x.drive_speed(52, 80)
+    x.rotate(90,25)
+    x.change_adjust(False)
+    u.DEBUGwithWait()
     x.drive_speed(-5, 50)
     x.rotate(-97, 50)
     u.move_servo(c.servoArm, c.armDown)

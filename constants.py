@@ -65,11 +65,9 @@ if isClone:
     armUp = 1500
     armUpBotguy = 900
     armBotguy = 1700
-    armDown = 1900
+    armDown = 1850
 
-    cowDown = 2047
-    cowMid = 1700
-    cowUp = 1250
+
 
     clawClose = 900
     clawOpen = 1900
@@ -82,6 +80,9 @@ if isClone:
     outriggerIn = 1800
     outriggerOut = 508
     outriggerFront = 0
+    #outriggerOutLess = 550
+    outriggerInMore = 1900
+    outriggerLineFollow = 1580
 
     # Tophat values
     FRONT_TOPHAT = 0

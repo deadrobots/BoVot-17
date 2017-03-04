@@ -256,3 +256,39 @@ def line_follow(distance):
         else:
             _drive(-30, -40)
     _drive(0,0)
+
+
+def line_follow_forward(distance):
+    _clear_ticks()
+    ticks = abs(INCHES_TO_TICKS * distance)
+    while _right_ticks() <= ticks:
+        if analog(0) >1500:
+            _drive(30, 40)
+        else:
+            _drive(40, 30)
+    _drive(0,0)
+
+def line_follow_forward_end(port):
+    i = 0
+    while (i < 21):
+        print i
+        if analog(port) > 1500:
+            i = 0
+            drive_timed(30, 80, .02)
+        else:
+            i = i + 1
+            drive_timed(80, 30, .02)
+
+
+def change_adjust(x):
+    global ADJUST
+    if x:
+        print("Adjusted to new value")
+        ADJUST = .9685
+    else:
+        print("Resetting to old value")
+        if isClone:
+            ADJUST = 0.98
+        else:
+            ADJUST = 1.08
+        ADJUST = 1.08 # add if clone 0.98
