@@ -13,12 +13,14 @@ def main():
     act.init()
     act.getBotGuy()
     act.goToCow()
-    act.findCow()
+    # act.findCow()
     act.grabCowAndGo()
     if seeding:
         act.toOtherSide()
-    act.upRamp()
-#   act.test()
+        act.driveToCow2()
+
+    #act.upRamp()
+    #act.test()
 
 
 if __name__ == "__main__":

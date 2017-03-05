@@ -64,7 +64,7 @@ if isClone:
 
     armUp = 1500
     armUpBotguy = 900
-    armBotguy = 1700
+    armBotguy = 1470
     armDown = 1850
 
 
