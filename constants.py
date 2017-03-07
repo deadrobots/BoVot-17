@@ -22,21 +22,22 @@ isClone = w.digital(CLONE_SWITCH)
 
 # Servos
 servoArm = 0
-outrigger = 1
+cowArm = 1  #up down
 servoClaw = 2
 servoCowClaw = 3
 
 
 
-armUp = 1350
+armUp = 1400
 armUpBotguy = 800
 armUpLineFollow = 550
-armBotguy = 1700
-armDown = 1700
+armBotguy = 1800
+armDown = 1850
 
-cowDown = 2047
-cowMid = 1700
-cowUp = 1250
+cowDown = 0
+cowMid = 0
+cowUp = 0
+cowArmStart = 500
 
 clawClose = 950
 clawOpen = 2047

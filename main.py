@@ -11,6 +11,7 @@ def main():
     print "running"
 
     act.init()
+
     act.getBotGuy()
     act.goToCow()
     # act.findCow()
