@@ -34,9 +34,7 @@ armUpLineFollow = 550
 armBotguy = 1800
 armDown = 1850
 
-cowDown = 0
-cowMid = 0
-cowUp = 0
+cowDown = 1650
 cowArmStart = 500
 
 clawClose = 950

@@ -11,7 +11,7 @@ def init():
         print "i am clone"
     else:
         print "i am prime"
-    u.move_servo(c.servoClaw, c.clawOpen, 100)
+    u.move_servo(c.servoClaw, c.clawClose, 100)
     u.move_servo(c.servoArm, c.armUpBotguy, 100)
     u.move_servo(c.servoCowClaw,c.cowClawStart,100)
     u.move_servo(c.cowArm, c.cowArmStart, 100)
@@ -22,30 +22,33 @@ def init():
 
 def getBotGuy():
     print "getBotGuy"
+    #Get out of start box
     if c.isClone:
         x.drive_speed(20, 50)
         x.rotate(-44, 25)
+        x.drive_speed(16.5, 80)
     else:
         x.drive_speed(22, 50)
-        x.rotate(-38, 25)
-    x.drive_speed(16.5, 80)
+        x.rotate(-44, 25)
+        x.drive_speed(18, 80)
+
+    #Turns to Botguy
     if c.isClone:
         x.rotate(85,50)
     else:
-        x.rotate(91, 50)
+        x.rotate(89, 50)
 
-
-    # u.move_servo(c.servoArm, c.armBotguy, 10)
     msleep(300)
     x.drive_speed(20,100) #Check for moving over bump. Possible change for later.
     x.drive_speed(4, -60)
+    u.move_servo(c.servoClaw, c.clawOpen, 10)
     u.move_servo(c.servoArm, c.armDown, 10)
     x.drive_speed(5, 50)
     msleep(200)
     u.move_servo(c.servoClaw, c.clawClose, 100) # grab botguy
     msleep(300)
     u.move_servo(c.servoArm, c.armUp, 10)
-    x.drive_speed(9.5,-20)
+    x.drive_speed(10.5,-20)
     u.move_servo(c.servoArm, c.armUpBotguy, 10)
     msleep(300)
 
@@ -56,51 +59,21 @@ def goToCow():
     if c.isClone:
         x.rotate(182, 30)
     else:
-        x.rotate(181,30)
-
+        x.rotate(178,30)
     print("new code here")
-    motor_power(c.COWMOTOR, -50)
-    msleep(500)
-    motor_power(c.COWMOTOR, -10)
-    msleep(1000)
+    #lower cow grabber arm
+    u.move_servo(c.cowArm, c.cowDown, 20)
+
     x.drive_speed(9, -50)
-    u.DEBUGwithWait()
-
-
-
-    # x.rotate(-90, 20)
-    # x.drive_speed(5, -80)
-    # x.rotate(182, 25)
-    # u.DEBUGwithWait()
-    # x.drive_speed(14, 50)
-    # x.rotate(187, 20)
-    # x.drive_speed(2, -50)
 
 def findCow():
     print "findCow"
     u.move_servo(c.servoArm, c.armUpLineFollow, 10)
     x.drive_speed(12, -80)
     u.move_servo(c.servoCowClaw, c.cowClawOpen, 10)
-    u.move_servo_on_white(c.outrigger, c.outriggerOut, 5) ###########################
-    print"rotate twoward black"
-    x.pivot_left_condition(25, u.onBlackFront, False) #######################
-    motor_power(c.COWMOTOR, -50)
-    msleep(500)
-    motor_power(c.COWMOTOR, -10)
     msleep(1000)
-    x.line_follow(25)
+    u.DEBUGwithWait()
 
-
-
-    ''''
-    time = seconds() + 2.0
-    while (seconds() < time):
-        if (analog(0) < 1000):
-            x._drive(-30,-50)
-        else:
-            x._drive(-50,-30)
-    x._drive(0,0)
-'''
 
 def grabCowAndGo():
     print "grabCowAndGo"
