@@ -35,7 +35,7 @@ if isClone:
     # Drive Constants
     INCHES_TO_TICKS = 165  # 169   #205 - 161     #156#127#50 cm #265
     WHEEL_DISTANCE = 4.25  # 205 - 4.25  # Distance between the two wheels
-    ADJUST = 0.98  # adjust left wheel counter to fix drift
+    ADJUST = 0.950 #0.98  # adjust left wheel counter to fix drift
 
 
 # Motor Control #
@@ -292,3 +292,26 @@ def change_adjust(x):
         else:
             ADJUST = 1.08
         ADJUST = 1.08 # add if clone 0.98
+
+def calibrate3():
+    AMOUNT = 6000
+    _clear_ticks()
+    _drive(50, 50)
+    startR = seconds()
+    while _right_ticks() < AMOUNT:
+        pass
+    endR = seconds() - startR
+    freeze_motors()
+    msleep(5000)
+    _clear_ticks()
+    _drive(50, 50)
+    startL = seconds()
+    while _left_ticks() < AMOUNT:
+        pass
+    endL = seconds() - startL
+
+    print "Value: " + str(endL / endR)
+
+
+    #1.07
+    # 0.93

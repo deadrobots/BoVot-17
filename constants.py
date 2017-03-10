@@ -30,6 +30,7 @@ servoCowClaw = 3
 
 armUp = 1400
 armUpBotguy = 800
+armUpRampBotGuy =1575
 armUpLineFollow = 550
 armBotguy = 1800
 armDown = 1850
@@ -37,12 +38,12 @@ armDown = 1850
 cowDown = 1650
 cowArmStart = 500
 
-clawClose = 950
+clawClose = 450
 clawOpen = 2047
 
-cowClawOpen = 400
-cowClawClose = 1500
-cowClawStart = 800
+cowClawOpen =1800
+cowClawClose = 1000
+cowClawStart = 1400
 
 outriggerMid = 1605
 outriggerSafe = 1250
@@ -65,14 +66,16 @@ if isClone:
     armUpBotguy = 900
     armBotguy = 1470
     armDown = 1850
+    armUpRampBotGuy = 1500
 
 
 
     clawClose = 900
     clawOpen = 1900
 
-    cowClawOpen = 400
+    cowClawOpen = 900
     cowClawClose = 1550
+    cowClawStart = 1650
 
     outriggerMid = 1605
     outriggerSafe = 1250

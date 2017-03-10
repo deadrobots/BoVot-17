@@ -4,7 +4,7 @@ import actions as act
 import utils as u
 import constants as c
 
-seeding = True
+seeding = False
 
 def main():
 
@@ -20,7 +20,7 @@ def main():
         act.toOtherSide()
         act.driveToCow2()
 
-    #act.upRamp()
+    act.upRamp()
     #act.test()
 
 
