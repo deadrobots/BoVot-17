@@ -18,9 +18,8 @@ def init():
     enable_servos()
     u.waitForButton()
     c.startTime = seconds()
-
+    #x.drive_speed(80, 100)
     # x.calibrate3()
-    # exit(0)
 
 
 def getBotGuy():
@@ -106,17 +105,36 @@ def grabCowAndGo():
         u.move_servo(c.cowArm, c.cowArmStart, 10)
         x.rotate(3, 10)
     else:
-        x.rotate(-2, 10)
+        #x.rotate(-2, 10)
         msleep(1000)
-        u.DEBUGwithWait()
         x.drive_speed(-10, 20)
         msleep(1000)
         x.rotate(2, 10)
-        #x.rotate(-30, 10)
         u.move_servo(c.servoCowClaw, c.cowClawClose, 10)
         u.move_servo(c.cowArm, c.cowArmStart, 10)
         #x.rotate(30, 10)
 
+
+def findCow():
+    u.waitForButton()
+    camera_open()
+    while True:
+        camera_update()
+        if get_object_count(0) > 0 and get_object_area(0, 0) > 1000:
+            if get_object_center_x(0, 0) > 130:
+                print "right"
+                x.drive_timed(-70, 70, .01)
+            elif get_object_center_x(0, 0) < 110:
+                print "left"
+                x.drive_timed(70, -70, .01)
+            else:
+                print "found it"
+                break
+        else:
+            print "i see nothing"
+            x.drive_timed(-70, 70, .01)
+    camera_close()
+    u.waitForButton()
 
 
     ##### #####
@@ -133,13 +151,11 @@ def grabCowAndGo():
 
     ###########
 
-    motor_power(c.COWMOTOR, 40)
-    msleep(2000)
 
 def toOtherSide():
     print "toOtherSide"
 
-    x.drive_speed(35.5, 50)
+    x.drive_speed(30, 50)
     x.rotate(-90, 30)
     x.drive_speed(28, 50)
     x.drive_speed(-4, 30)
@@ -168,7 +184,6 @@ def driveToCow2():
 
 def pickUpCow2():
     x.drive_timed(-20, -25, 2)
-    u.DEBUGwithWait()
 
 
 
