@@ -30,7 +30,7 @@ servoCowClaw = 3
 
 armUp = 1400
 armUpBotguy = 800
-armUpRampBotGuy =1575
+armUpRampBotGuy =1500 #1575
 armUpLineFollow = 550
 armBotguy = 1800
 armDown = 1850
@@ -39,7 +39,7 @@ cowDown = 1800
 cowArmStart = 500
 
 clawClose = 450
-clawOpen = 2047
+clawOpen = 2000
 
 cowClawOpen =1800
 cowClawClose = 1000
