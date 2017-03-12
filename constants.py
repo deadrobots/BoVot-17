@@ -36,7 +36,8 @@ armBotguy = 1800
 armDown = 1850
 
 cowDown = 1800
-cowArmStart = 500
+cowArmStart = 345
+cowArmTurn = 1370
 
 clawClose = 450
 clawOpen = 2000
