@@ -222,6 +222,10 @@ def pickUpCow2():
     # x.drive_speed(25,100)
 
 
+def seeWhite():
+    return analog(0) < 1500
+
+
 def upRamp():
     print "upRamp"
     # x.drive_speed(-20, 100)  #square up
@@ -229,16 +233,24 @@ def upRamp():
     # x.ADJUST = 1.07
     # x.drive_speed(20, 100)
     x.ADJUST = 1.07 #straighter drive, didn't want to mess up earlier values
-    x.drive_speed(35, 100)
-    msleep(300)
-    # x.rotate(15, 50)
-    msleep(300)
-    x.drive_speed(38, 100)
-    x.drive_speed(6, -50)
-    x.rotate(90, 50)
-    x.drive_speed(30, 100)
-    x.drive_speed(4, -50)
-    x.rotate(82, 50)
+
+    # x.drive_speed(35, 100)
+    # x.drive_speed(38, 100)
+
+    x.drive_condition(100, 100, seeWhite)
+    x.pivot_right(45, 50)
+    x.drive_speed(5, 50)
+    x.pivot_right(45, 50)
+    x.drive_speed(17, 80)
+    x.drive_speed(-3, 50)
+    x.pivot_left(-90, 85)
+    x.drive_speed(-6, 50)
+
+    # x.drive_speed(6, -50)
+    # x.rotate(90, 50)
+    # x.drive_speed(30, 100)
+    # x.drive_speed(4, -50)
+    # x.rotate(82, 50)
     u.move_servo(c.servoArm, c.armUpRampBotGuy,10)
     msleep(300)
     x.ADJUST = 1.04
@@ -251,9 +263,10 @@ def upRamp():
     msleep(100)
     u.move_servo(c.cowArm, c.cowArmStart)
     msleep(100)
-    u.move_servo(c.servoArm, c.armDown)
+    u.move_servo(c.servoArm, c.botguyHover)
     msleep(100)
-    x.rotate(-20, 25)
+    x.rotate(-30, 25)
+    u.move_servo(c.servoArm, c.armDown)
     print "did it work?"
     u.DEBUGwithWait()
 

@@ -4,7 +4,7 @@ import actions as act
 import utils as u
 import constants as c
 
-seeding = False
+seeding = True
 
 def main():
 

@@ -34,6 +34,7 @@ armUpRampBotGuy =1500 #1575
 armUpLineFollow = 550
 armBotguy = 1800
 armDown = 1850
+botguyHover = 1300
 
 cowDown = 1800
 cowArmStart = 345
