@@ -35,7 +35,7 @@ if isClone:
     # Drive Constants
     INCHES_TO_TICKS = 165  # 169   #205 - 161     #156#127#50 cm #265
     WHEEL_DISTANCE = 4.25  # 205 - 4.25  # Distance between the two wheels
-    ADJUST = 0.950 #0.98  # adjust left wheel counter to fix drift
+    ADJUST = 0.963 #0.98  # adjust left wheel counter to fix drift
 
 
 # Motor Control #

@@ -20,7 +20,6 @@ def main():
         act.driveToCow2()
 
     act.upRamp()
-    #act.test()
 
 
 if __name__ == "__main__":

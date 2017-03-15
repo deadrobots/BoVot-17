@@ -19,63 +19,53 @@ def init():
     position()
     u.waitForButton()
     c.startTime = seconds()
+    camera_open()
     #x.drive_speed(80, 100)
+    #exit(0)
     # x.calibrate3()
-
 
 def position():
     x.drive_speed(-2, 25)
-    x.drive_speed(2.2, 50)
-    x.pivot_left(47, 25)
+    x.drive_speed(2.15, 50)
+    x.pivot_left(48, 25)
     x.drive_speed(.03, 25)
-
 
 def getBotGuy():
     print "getBotGuy"
     #Get out of start box
+
+    x.drive_speed(15, 100)
+    msleep(200)
     if c.isClone:
-        x.drive_speed(20, 50)
-        x.rotate(-42, 25)
-        x.drive_speed(16.5, 80)
-        x.rotate(87, 50)
+        x.rotate(-9, 50) #speed was 25
     else:
-        # x.drive_speed(20, 100) #speed was 50
-        # x.rotate(-41, 50) #speed was 25
-        # x.drive_speed(17, 100) #speed was 80
-        # x.rotate(89, 50)
+        x.rotate(-8,50)
 
-        x.drive_speed(15, 100) #speed was 50
-        msleep(200)
-        x.rotate(-6, 50) #speed was 25
-        msleep(200)
-        x.drive_speed(25, 100)#speed was 80
-        x.rotate(57, 50)
+    msleep(200)
+    if c.isClone:
+        x.drive_speed(23, 100)#speed was 80
+    else:
+        x.drive_speed(24,100)
 
+    x.rotate(57, 50)
 
     msleep(300)
     x.drive_speed(6,100)#Check for moving over bump. Possible change for later.
+    x.drive_timed(20, 100, 1/4)
     msleep(5000)
-    if c.isClone:
-        x.drive_speed(4, -60)
-
-    else:
-        x.drive_speed(6, -60)
+    x.drive_speed(6, -60)
     u.move_servo(c.servoClaw, c.clawOpen, 100)
     u.move_servo(c.servoArm, c.armDown, 20)
-    if c.isClone:
-        x.drive_speed(5, 50)
-
-    else:
-        x.drive_speed(7, 50)
+    x.drive_speed(7, 50)
     msleep(200)
     u.move_servo(c.servoClaw, c.clawClose, 100) # grab botguy
     msleep(300)
     u.move_servo(c.servoArm, c.armUp, 10)
 
     if c.isClone:
-        x.drive_speed(10.5,-20)
+        x.drive_speed(5,-40)
         u.move_servo(c.servoArm, c.armUpBotguy, 10)
-
+        x.drive_speed(4.5,-60)
     else:
         x.drive_speed(5, -40)
         u.move_servo(c.servoArm, c.armUpBotguy, 10)
@@ -90,7 +80,7 @@ def goToCow():
         x.rotate(182,30)
         u.move_servo(c.cowArm, c.cowDown, 20)
         u.move_servo(c.servoCowClaw, c.cowClawOpen, 20)
-        x.drive_speed(9, -50)
+        x.drive_speed(6, -78)
     else:
         x.rotate(175, 50) #was 30 and then was 75
         u.move_servo(c.cowArm, c.cowDown, 20)
@@ -99,63 +89,45 @@ def goToCow():
     print("new code here")
 
 def findCow():
-    camera_open()
     count = 0
-    while True:
+    tries = 100
+    while tries > 0:
         camera_update()
         if get_object_count(0) > 0 and get_object_area(0, 0) > 1000:
+            print("i see something")
             if get_object_center_x(0, 0) > 130:
                 print "right"
                 count -= 1
-                x.drive_timed(-70, 70, .01)
+                x.drive_timed(-30, 30, .01)
             elif get_object_center_x(0, 0) < 110:
                 print "left"
                 count += 1
-                x.drive_timed(70, -70, .01)
+                x.drive_timed(30, -30, .01)
             else:
-                print "found it"
+                print "found it in " + str(100 - tries) + " tries"
+                print(get_object_center_x(0, 0))
+                print(get_object_area(0, 0))
                 break
         else:
             print "i see nothing"
-            break
+            tries -= 1
+            msleep(10)
         #msleep(100)
 
-    while count != 0:
-        if count > 0:
-            count -= 1
-            x.drive_timed(-70, 70, .01)
-        else:
-            count += 1
-            x.drive_timed(70, -70, .01)
-
-    camera_close()
-
-    ##### #####
-    #Time Test#
-
-    try:
-        data = open("data.txt", "r").read()
-    except Exception:
-        data = ""
-    open("data.txt", "w").write(data + "\n" + str(seconds() - c.startTime))
-
-    print("\n\nDATA\n")
-    print(open("data.txt", "r").read() + "\n\n")
-
-    ###########
-
+    # while count != 0:
+    #     if count > 0:
+    #         count -= 1
+    #         x.drive_timed(-70, 70, .01)
+    #     else:
+    #         count += 1
+    #         x.drive_timed(70, -70, .01)
 
 def grabCowAndGo():
     print "grabCowAndGo"
     if c.isClone:
-        x.rotate(3, 20)
-        msleep(200)
-        x.drive_speed(-7, 20)
-        msleep(200)
-        x.rotate(-6, 10)
+        x.drive_speed(-5, 20)
         u.move_servo(c.servoCowClaw, c.cowClawClose, 10)
         u.move_servo(c.cowArm, c.cowArmStart, 10)
-        x.rotate(3, 10)
     else:
         #x.rotate(-2, 10)
         msleep(200)
@@ -169,10 +141,14 @@ def grabCowAndGo():
 
 def toOtherSide():
     print "toOtherSide"
+    if c.isClone:
+        x.drive_speed(33, 85)
+    else:
+        x.drive_speed(39, 85)
 
-    x.drive_speed(30, 50)
-    x.rotate(-90, 30)
-    x.drive_speed(28, 50)
+    x.rotate(-84, 30)
+    x.drive_speed(34, 80)
+    u.DEBUGwithWait()
     x.drive_speed(-4, 30)
     x.pivot_right(45, 30)
     u.move_servo(c.servoArm, c.armBotguy, 10)

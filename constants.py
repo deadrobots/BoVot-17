@@ -75,8 +75,8 @@ if isClone:
     clawClose = 900
     clawOpen = 1900
 
-    cowClawOpen = 900
-    cowClawClose = 1550
+    cowClawOpen = 1550
+    cowClawClose = 900
     cowClawStart = 1650
 
     outriggerMid = 1605
