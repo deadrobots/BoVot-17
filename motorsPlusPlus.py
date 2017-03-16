@@ -280,6 +280,17 @@ def line_follow_forward_end(port):
             i = i + 1
             drive_timed(80, 30, .02)
 
+def line_follow_ramp (distance):
+    _clear_ticks()
+    ticks = abs(INCHES_TO_TICKS * distance)
+    while _right_ticks() <= ticks:
+        if analog(0) < 1500:
+            _drive(40, 30)
+        elif analog(1) < 1500:
+            _drive(30, 40)
+        else:
+            _drive(40, 40)
+    _drive(0,0)
 
 def change_adjust(x):
     global ADJUST

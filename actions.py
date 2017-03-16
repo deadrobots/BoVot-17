@@ -39,20 +39,20 @@ def getBotGuy():
     if c.isClone:
         x.rotate(-9, 50) #speed was 25
     else:
-        x.rotate(-8,50)
+        x.rotate(-9, 50)
 
     msleep(200)
     if c.isClone:
         x.drive_speed(23, 100)#speed was 80
+        x.rotate(57, 50)
     else:
-        x.drive_speed(24,100)
-
-    x.rotate(57, 50)
+        x.drive_speed(25, 100)
+        x.rotate(59, 50)
 
     msleep(300)
-    x.drive_speed(6,100)#Check for moving over bump. Possible change for later.
-    x.drive_timed(20, 100, 1/4)
-    msleep(5000)
+    x.drive_speed(8,100)#Check for moving over bump. Possible change for later.
+    x.drive_timed(20, 100, .25)
+    msleep(300)
     x.drive_speed(6, -60)
     u.move_servo(c.servoClaw, c.clawOpen, 100)
     u.move_servo(c.servoArm, c.armDown, 20)
@@ -201,7 +201,6 @@ def pickUpCow2():
 def seeWhite():
     return analog(0) < 1500
 
-
 def upRamp():
     print "upRamp"
     # x.drive_speed(-20, 100)  #square up
@@ -230,8 +229,12 @@ def upRamp():
     u.move_servo(c.servoArm, c.armUpRampBotGuy,10)
     msleep(300)
     x.ADJUST = 1.04
-    x.drive_speed(70, 75)
+
+    x.drive_speed(15, 75)
+    x.line_follow_ramp(56)
     u.move_servo(c.cowArm, c.cowArmTurn, 10)
+    #u.move_servo(c.servoArm, c.armUpRampBotGuyLowered, 10)
+    #x.line_follow_ramp(20)
     msleep(300)
     x.rotate(10, 25)
     msleep(100)
@@ -241,7 +244,9 @@ def upRamp():
     msleep(100)
     u.move_servo(c.servoArm, c.botguyHover)
     msleep(100)
-    x.rotate(-30, 25)
+    x.rotate(30, 25)
+    msleep(100)
+    x.rotate(-60, 25)
     u.move_servo(c.servoArm, c.armDown)
     print "did it work?"
     u.DEBUGwithWait()
