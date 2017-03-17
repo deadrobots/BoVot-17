@@ -39,7 +39,7 @@ botguyHover = 1300
 
 cowDown = 1800
 cowArmStart = 345
-cowArmTurn = 1370
+cowArmTurn = 1270
 
 clawClose = 450
 clawOpen = 2000

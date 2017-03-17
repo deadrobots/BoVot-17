@@ -11,6 +11,8 @@ def init():
         print "i am clone"
     else:
         print "i am prime"
+    start_up_test()
+    u.waitForButton()
     u.move_servo(c.servoClaw, c.clawClose, 100)
     u.move_servo(c.servoArm, c.armUpBotguy, 100)
     u.move_servo(c.servoCowClaw,c.cowClawStart,100)
@@ -29,6 +31,21 @@ def position():
     x.drive_speed(2.15, 50)
     x.pivot_left(48, 25)
     x.drive_speed(.03, 25)
+
+def lineFollowRampTest():
+    msleep(1000)
+    u.move_servo(c.servoClaw, c.clawClose, 100)
+    msleep(100)
+    u.move_servo(c.servoArm, c.armUpRampBotGuy, 100)
+    msleep(100)
+    u.move_servo(c.servoClaw, c.cowClawClose, 100)
+    msleep(100)
+    u.move_servo(c.servoCowClaw, c.cowArmTurn, 100)
+    msleep(100)
+    u.move_servo(c.servoClaw, c.clawClose, 100)
+    msleep(4000)
+    x.drive_speed(15, 80)
+    x.line_follow_ramp(56)
 
 def getBotGuy():
     print "getBotGuy"
@@ -135,7 +152,7 @@ def grabCowAndGo():
         msleep(200)
         x.rotate(2, 10)
         u.move_servo(c.servoCowClaw, c.cowClawClose, 80)
-        u.move_servo(c.cowArm, c.cowArmStart, 20)
+        u.move_servo(c.cowArm, c.cowArmTurn, 20)
         #x.rotate(30, 10)
 
 
@@ -219,7 +236,7 @@ def upRamp():
     x.drive_speed(17, 80)
     x.drive_speed(-3, 50)
     x.pivot_left(-90, 85)
-    x.drive_speed(-6, 50)
+    x.drive_speed(-8, 50)
 
     # x.drive_speed(6, -50)
     # x.rotate(90, 50)
@@ -230,9 +247,9 @@ def upRamp():
     msleep(300)
     x.ADJUST = 1.04
 
-    x.drive_speed(15, 75)
+    x.drive_speed(17, 75)
     x.line_follow_ramp(56)
-    u.move_servo(c.cowArm, c.cowArmTurn, 10)
+    #u.move_servo(c.cowArm, c.cowArmTurn, 10)
     #u.move_servo(c.servoArm, c.armUpRampBotGuyLowered, 10)
     #x.line_follow_ramp(20)
     msleep(300)
@@ -244,9 +261,7 @@ def upRamp():
     msleep(100)
     u.move_servo(c.servoArm, c.botguyHover)
     msleep(100)
-    x.rotate(30, 25)
-    msleep(100)
-    x.rotate(-60, 25)
+    x.rotate(-30, 25)
     u.move_servo(c.servoArm, c.armDown)
     print "did it work?"
     u.DEBUGwithWait()
@@ -260,3 +275,21 @@ def test():
 
 
     print "Seconds elapsed: " + seconds() - c.startTime
+
+
+def start_up_test():
+    enable_servos()
+    u.move_servo(c.servoArm, c.armUp,10)
+    u.move_servo(c.cowArm, c.cowArmStart,10)
+    u.move_servo(c.servoClaw, c.clawOpen, 10)
+    u.move_servo(c.servoCowClaw, c.cowClawOpen, 10)
+    msleep(500)
+    x.drive_condition(50,50,seeLineOne, True)
+    msleep(500)
+    x.drive_condition(-50,-50,seeLineTwo, True)
+
+def seeLineOne():
+    return analog(0) < 2000
+
+def seeLineTwo():
+    return analog(1) > 2000
