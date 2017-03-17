@@ -284,13 +284,15 @@ def line_follow_ramp (distance):
     _clear_ticks()
     ticks = abs(INCHES_TO_TICKS * distance)
     while _right_ticks() <= ticks:
+        #if analog(0) <1500 and analog(1) <1500
+        #else:
         if analog(0) < 1500:
-            _drive(50, 37.5)
+            _drive(40, 30)
         elif analog(1) < 1500:
-            _drive(37.5, 50)
+            _drive(30, 40)
         else:
-            _drive(53, 50)
-    _drive(0,0)
+            _drive(43, 40)
+    freeze_motors()
 
 def change_adjust(x):
     global ADJUST

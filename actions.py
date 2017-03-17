@@ -11,6 +11,9 @@ def init():
         print "i am clone"
     else:
         print "i am prime"
+    enable_servos()
+    lineFollowRampTest()
+    u.DEBUGwithWait()
     start_up_test()
     u.waitForButton()
     u.move_servo(c.servoClaw, c.clawClose, 100)
@@ -44,7 +47,7 @@ def lineFollowRampTest():
     msleep(100)
     u.move_servo(c.servoClaw, c.clawClose, 100)
     msleep(4000)
-    x.drive_speed(15, 80)
+    #x.drive_speed(15, 80)
     x.line_follow_ramp(56)
 
 def getBotGuy():
@@ -161,8 +164,8 @@ def seeWhite():
 
 def upRamp():
     print "upRamp"
-    # x.drive_speed(-20, 100)  #square up
-    # msleep(300)
+    x.drive_speed(-20, 100)  #square up
+    msleep(300)
     # x.ADJUST = 1.07
     # x.drive_speed(20, 100)
     x.ADJUST = 1.07 #straighter drive, didn't want to mess up earlier values
