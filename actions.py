@@ -13,6 +13,7 @@ def init():
         print "i am prime"
     enable_servos()
     lineFollowRampTest()
+    scoreOnTerrace()
     u.DEBUGwithWait()
     start_up_test()
     u.waitForButton()
@@ -37,18 +38,24 @@ def position():
 
 def lineFollowRampTest():
     msleep(1000)
-    u.move_servo(c.servoClaw, c.clawClose, 100)
+    u.move_servo(c.servoClaw, c.clawClose, 50)
     msleep(100)
-    u.move_servo(c.servoArm, c.armUpRampBotGuy, 100)
+    u.move_servo(c.servoArm, c.armUpRampBotGuy, 50)
+    #msleep(100)
+    #u.move_servo(c.servoClaw, c.cowClawClose, 50)
     msleep(100)
-    u.move_servo(c.servoClaw, c.cowClawClose, 100)
+    u.move_servo(c.servoCowClaw, c.cowClawClose, 50)
     msleep(100)
-    u.move_servo(c.servoCowClaw, c.cowArmTurn, 100)
-    msleep(100)
-    u.move_servo(c.servoClaw, c.clawClose, 100)
+    u.move_servo(c.cowArm, c.cowArmStart, 50)
+    #msleep(100)
+    #u.move_servo(c.servoClaw, c.clawClose, 50)
     msleep(4000)
     #x.drive_speed(15, 80)
-    x.line_follow_ramp(56)
+    x.drive_speed(23, 60)
+
+    x.line_follow_ramp(37)
+    msleep(1000)
+    x.line_follow_terrace(11)
 
 def getBotGuy():
     print "getBotGuy"
@@ -196,15 +203,19 @@ def upRamp():
     #u.move_servo(c.cowArm, c.cowArmTurn, 10)
     #u.move_servo(c.servoArm, c.armUpRampBotGuyLowered, 10)
     #x.line_follow_ramp(20)
+
+def scoreOnTerrace():
     msleep(300)
     x.rotate(10, 25)
-    msleep(100)
+    msleep(2000)
+    u.move_servo(c.cowArm, c.cowArmDrop)
+    msleep(2000)
     u.move_servo(c.servoCowClaw, c.cowClawOpen)
-    msleep(100)
+    msleep(2000)
     u.move_servo(c.cowArm, c.cowArmStart)
-    msleep(100)
+    msleep(2000)
     u.move_servo(c.servoArm, c.botguyHover)
-    msleep(100)
+    msleep(2000)
     x.rotate(-30, 25)
     u.move_servo(c.servoArm, c.armDown)
     print "did it work?"
@@ -240,63 +251,3 @@ def seeLineTwo():
 
 #################################### Merged Code ####################################
 
-def alt_init():
-    print "init"
-    if c.isClone:
-        print "i am clone"
-    else:
-        print "i am prime"
-    u.move_servo(c.servoClaw, c.clawOpen, 100)
-    u.move_servo(c.servoArm, c.armDown, 100)
-    u.move_servo(c.servoCowClaw,c.cowClawOpen,100)
-    u.move_servo(c.cowArm, c.cowDown, 100)
-    enable_servos()
-    # position()
-    u.waitForButton()
-    c.startTime = seconds()
-    u.move_servo(c.servoClaw, c.clawClose, 45)
-    msleep(500)
-    u.move_servo(c.servoArm, c.armUpBotguy, 45)
-    camera_open()
-
-def toOtherSide():
-    print "toOtherSide"
-    if c.isClone:
-        x.drive_speed(37, 85)
-    else:
-        x.drive_speed(39, 85)
-
-    x.rotate(-84, 30)
-    x.drive_speed(34, 80)
-    x.drive_speed(-3, 30)
-    x.pivot_right(45, 30)
-    u.move_servo(c.servoArm, c.armBotguy, 10)
-    x.drive_timed(-75, -20, 2)
-    #x.drive_speed(-18.0, 45)
-    x.line_follow(-19)
-    u.move_servo(c.servoArm, c.armUpBotguy, 15)
-    x.drive_speed(-8.0, 45)
-    x.drive_speed(.3,45)
-    x.pivot_right(60, 45)
-
-    x.drive_speed(-1.5, 45)
-    x.pivot_right(20, 45)
-
-    x.drive_speed(5, 45)
-    x.drive_speed(-20, 45)
-    u.DEBUGwithWait()
-
-
-    x.drive_timed(-50, -20, 2)
-    u.waitForButton()
-    x.pivot_right(43, 60)
-    x.drive_speed(7.5, 30)
-    x.drive_speed(-24, 50)
-
-def driveToCow2():
-    x.rotate(80, 25)
-    x.drive_speed(-25, 85)
-
-def pickUpCow2():
-    x.drive_timed(-20, -25, 2)
-    u.move_servo(c.servoArm, c.cowDown, 10)

@@ -12,6 +12,9 @@ These values refer to prime/clone status, the left motor's port, and the right m
 from constants import isClone
 from constants import LMOTOR
 from constants import RMOTOR
+from constants import LTOPHAT
+from constants import RTOPHAT
+
 
 from math import pi
 
@@ -25,6 +28,7 @@ from wallaby import msleep
 from wallaby import seconds
 from wallaby import analog
 from wallaby import set_servo_position
+from wallaby import accel_x
 
 # Drive Constants
 INCHES_TO_TICKS = 172#169   #205 - 161     #156#127#50 cm #265
@@ -283,15 +287,31 @@ def line_follow_forward_end(port):
 def line_follow_ramp (distance):
     _clear_ticks()
     ticks = abs(INCHES_TO_TICKS * distance)
+    while accel_x() < 0:
+        #if analog(0) <1500 and analog(1) <1500
+        #else:
+        if analog(LTOPHAT) > 1500:
+            _drive(30, 60)
+            print ("On white")
+        else:
+            _drive(60, 30)
+            print("On black")
+        msleep(20)
+    freeze_motors()
+
+def line_follow_terrace (distance):
+    _clear_ticks()
+    ticks = abs(INCHES_TO_TICKS * distance)
     while _right_ticks() <= ticks:
         #if analog(0) <1500 and analog(1) <1500
         #else:
-        if analog(0) < 1500:
-            _drive(40, 30)
-        elif analog(1) < 1500:
-            _drive(30, 40)
+        if analog(LTOPHAT) > 1500:
+            _drive(40, 50)
+            print ("On white")
         else:
-            _drive(43, 40)
+            _drive(50, 40)
+            print("On black")
+        msleep(20)
     freeze_motors()
 
 def change_adjust(x):

@@ -13,6 +13,10 @@ LMOTOR = 0
 RMOTOR = 3
 COWMOTOR = 1
 
+# analog ports
+LTOPHAT = 0
+RTOPHAT = 1
+
 # Digital ports
 CLONE_SWITCH = 9
 RIGHT_BUTTON = 13
@@ -40,6 +44,7 @@ botguyHover = 1300
 cowDown = 1800
 cowArmStart = 345
 cowArmTurn = 1270
+cowArmDrop = 1550
 
 clawClose = 450
 clawOpen = 2000
@@ -70,8 +75,6 @@ if isClone:
     armBotguy = 1470
     armDown = 1850
     armUpRampBotGuy = 1500
-
-
 
     clawClose = 900
     clawOpen = 1900
