@@ -11,10 +11,10 @@ def init():
         print "i am clone"
     else:
         print "i am prime"
-    enable_servos()
     lineFollowRampTest()
     scoreOnTerrace()
     u.DEBUGwithWait()
+    enable_servos()
     start_up_test()
     u.waitForButton()
     u.move_servo(c.servoClaw, c.clawClose, 100)
@@ -37,16 +37,17 @@ def position():
     x.drive_speed(.03, 25)
 
 def lineFollowRampTest():
-    msleep(1000)
+
     u.move_servo(c.servoClaw, c.clawClose, 50)
-    msleep(100)
+    #msleep(100)
     u.move_servo(c.servoArm, c.armUpRampBotGuy, 50)
     #msleep(100)
     #u.move_servo(c.servoClaw, c.cowClawClose, 50)
-    msleep(100)
+    #msleep(100)
     u.move_servo(c.servoCowClaw, c.cowClawClose, 50)
-    msleep(100)
+    #msleep(100)
     u.move_servo(c.cowArm, c.cowArmStart, 50)
+    enable_servos()
     #msleep(100)
     #u.move_servo(c.servoClaw, c.clawClose, 50)
     msleep(4000)
@@ -54,7 +55,7 @@ def lineFollowRampTest():
     x.drive_speed(23, 60)
 
     x.line_follow_ramp(37)
-    msleep(1000)
+    #msleep(1000)
     x.line_follow_terrace(11)
 
 def getBotGuy():
@@ -206,18 +207,22 @@ def upRamp():
 
 def scoreOnTerrace():
     msleep(300)
-    x.rotate(10, 25)
-    msleep(2000)
     u.move_servo(c.cowArm, c.cowArmDrop)
-    msleep(2000)
+    msleep(500)
+    x.rotate(10, 25)
+    msleep(500)
     u.move_servo(c.servoCowClaw, c.cowClawOpen)
-    msleep(2000)
+    msleep(500)
     u.move_servo(c.cowArm, c.cowArmStart)
-    msleep(2000)
+    msleep(500)
     u.move_servo(c.servoArm, c.botguyHover)
-    msleep(2000)
+    msleep(500)
     x.rotate(-30, 25)
     u.move_servo(c.servoArm, c.armDown)
+    u.move_servo(c.cowArm, c.cowDown)
+    u.move_servo(c.servoCowClaw, c.cowClawPush)
+    x.drive_speed(1,20)
+    x.rotate(-5,20)
     print "did it work?"
     u.DEBUGwithWait()
 

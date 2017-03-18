@@ -297,7 +297,8 @@ def line_follow_ramp (distance):
             _drive(60, 30)
             print("On black")
         msleep(20)
-    freeze_motors()
+    _drive(30,30)
+    #freeze_motors()
 
 def line_follow_terrace (distance):
     _clear_ticks()
@@ -305,13 +306,13 @@ def line_follow_terrace (distance):
     while _right_ticks() <= ticks:
         #if analog(0) <1500 and analog(1) <1500
         #else:
-        if analog(LTOPHAT) > 1500:
-            _drive(40, 50)
+        if analog(LTOPHAT) > 2000:
+            _drive(30, 35)
             print ("On white")
         else:
-            _drive(50, 40)
+            _drive(35, 30)
             print("On black")
-        msleep(20)
+        msleep(10)
     freeze_motors()
 
 def change_adjust(x):

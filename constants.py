@@ -50,6 +50,7 @@ clawClose = 450
 clawOpen = 2000
 
 cowClawOpen =1800
+cowClawPush =1900
 cowClawClose = 1000
 cowClawStart = 1400
 
