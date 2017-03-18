@@ -11,9 +11,7 @@ def init():
         print "i am clone"
     else:
         print "i am prime"
-    lineFollowRampTest()
-    scoreOnTerrace()
-    u.DEBUGwithWait()
+
     enable_servos()
     start_up_test()
     u.waitForButton()
@@ -21,7 +19,7 @@ def init():
     u.move_servo(c.servoArm, c.armUpBotguy, 100)
     u.move_servo(c.servoCowClaw,c.cowClawStart,100)
     u.move_servo(c.cowArm, c.cowArmStart, 100)
-    enable_servos()
+    #enable_servos()
     position()
     u.waitForButton()
     c.startTime = seconds()
@@ -31,32 +29,16 @@ def init():
     # x.calibrate3()
 
 def position():
-    x.drive_speed(-2, 25)
-    x.drive_speed(2.15, 50)
-    x.pivot_left(48, 25)
-    x.drive_speed(.03, 25)
-
-def lineFollowRampTest():
-
-    u.move_servo(c.servoClaw, c.clawClose, 50)
-    #msleep(100)
-    u.move_servo(c.servoArm, c.armUpRampBotGuy, 50)
-    #msleep(100)
-    #u.move_servo(c.servoClaw, c.cowClawClose, 50)
-    #msleep(100)
-    u.move_servo(c.servoCowClaw, c.cowClawClose, 50)
-    #msleep(100)
-    u.move_servo(c.cowArm, c.cowArmStart, 50)
-    enable_servos()
-    #msleep(100)
-    #u.move_servo(c.servoClaw, c.clawClose, 50)
-    msleep(4000)
-    #x.drive_speed(15, 80)
-    x.drive_speed(23, 60)
-
-    x.line_follow_ramp(37)
-    #msleep(1000)
-    x.line_follow_terrace(11)
+    if c.isClone:
+        x.drive_speed(-2, 25)
+        x.drive_speed(2.15, 50)
+        x.pivot_left(48, 25)
+        x.drive_speed(.03, 25)
+    else:
+        x.drive_speed(-1, 15)
+        x.drive_speed(2.1, 50)
+        x.pivot_left(49, 25)
+        x.drive_speed(.03, 25)
 
 def getBotGuy():
     print "getBotGuy"
@@ -67,14 +49,14 @@ def getBotGuy():
     if c.isClone:
         x.rotate(-9, 50) #speed was 25
     else:
-        x.rotate(-9, 50)
+        x.rotate(-8, 50)
 
     msleep(200)
     if c.isClone:
         x.drive_speed(23, 100)#speed was 80
         x.rotate(57, 50)
     else:
-        x.drive_speed(25, 100)
+        x.drive_speed(23, 100)
         x.rotate(59, 50)
 
     msleep(300)
@@ -87,6 +69,7 @@ def getBotGuy():
     x.drive_speed(7, 50)
     msleep(200)
     u.move_servo(c.servoClaw, c.clawClose, 100) # grab botguy
+    u.DEBUGwithWait()
     msleep(300)
     u.move_servo(c.servoArm, c.armUp, 10)
 
@@ -166,10 +149,16 @@ def grabCowAndGo():
         u.move_servo(c.cowArm, c.cowArmTurn, 20)
         #x.rotate(30, 10)
 
+def goToTerrace():
+    x.drive_speed(23, 60)
+    x.line_follow_ramp(37)
+    x.line_follow_terrace(12)
+
         
 def seeWhite():
     return analog(0) < 1500
 
+'''
 def upRamp():
     print "upRamp"
     x.drive_speed(-20, 100)  #square up
@@ -204,12 +193,13 @@ def upRamp():
     #u.move_servo(c.cowArm, c.cowArmTurn, 10)
     #u.move_servo(c.servoArm, c.armUpRampBotGuyLowered, 10)
     #x.line_follow_ramp(20)
+'''
 
 def scoreOnTerrace():
     msleep(300)
     u.move_servo(c.cowArm, c.cowArmDrop)
     msleep(500)
-    x.rotate(10, 25)
+    x.rotate(15, 25)
     msleep(500)
     u.move_servo(c.servoCowClaw, c.cowClawOpen)
     msleep(500)
@@ -217,7 +207,7 @@ def scoreOnTerrace():
     msleep(500)
     u.move_servo(c.servoArm, c.botguyHover)
     msleep(500)
-    x.rotate(-30, 25)
+    x.rotate(-35, 25)
     u.move_servo(c.servoArm, c.armDown)
     u.move_servo(c.cowArm, c.cowDown)
     u.move_servo(c.servoCowClaw, c.cowClawPush)
@@ -239,6 +229,10 @@ def test():
 
 def start_up_test():
     enable_servos()
+    x.pivot_left(45,25)
+    msleep(1000)
+    x.pivot_left(-45,25)
+    msleep(1000)
     u.move_servo(c.servoArm, c.armUp,10)
     u.move_servo(c.cowArm, c.cowArmStart,10)
     u.move_servo(c.servoClaw, c.clawOpen, 10)
@@ -247,6 +241,17 @@ def start_up_test():
     x.drive_condition(50,50,seeLineOne, True)
     msleep(500)
     x.drive_condition(-50,-50,seeLineTwo, True)
+
+def lineFollowRampTest():
+    u.move_servo(c.servoClaw, c.clawClose, 50)
+    u.move_servo(c.servoArm, c.armUpRampBotGuy, 50)
+    u.move_servo(c.servoCowClaw, c.cowClawClose, 50)
+    u.move_servo(c.cowArm, c.cowArmStart, 50)
+    enable_servos()
+    msleep(1000)
+    x.drive_speed(23, 60)
+    x.line_follow_ramp(37)
+    x.line_follow_terrace(12)
 
 def seeLineOne():
     return analog(0) < 2000

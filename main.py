@@ -21,7 +21,8 @@ def main():
         act.toOtherSide()
         act.driveToCow2()
 
-    act.upRamp()
+    act.goToTerrace()
+    act.scoreOnTerrace()
 
 
 if __name__ == "__main__":

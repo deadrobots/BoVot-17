@@ -287,17 +287,26 @@ def line_follow_forward_end(port):
 def line_follow_ramp (distance):
     _clear_ticks()
     ticks = abs(INCHES_TO_TICKS * distance)
+    i = 0
+    maxSpeed = 60
     while accel_x() < 0:
         #if analog(0) <1500 and analog(1) <1500
         #else:
-        if analog(LTOPHAT) > 1500:
-            _drive(30, 60)
-            print ("On white")
+        if i == 50:
+            maxSpeed = 40
+        if analog(LTOPHAT) > 2300:
+            _drive(30, maxSpeed)
+            print ("On black Turn Left")
+        elif analog(LTOPHAT) < 1700:
+            _drive(maxSpeed, 30)
+            print("On white Turn Right")
         else:
-            _drive(60, 30)
-            print("On black")
+            _drive(45,45)
+            print("Going straight")
+            i = i + 1
+            print(i)
         msleep(20)
-    _drive(30,30)
+    _drive(0, 0)
     #freeze_motors()
 
 def line_follow_terrace (distance):
@@ -306,12 +315,16 @@ def line_follow_terrace (distance):
     while _right_ticks() <= ticks:
         #if analog(0) <1500 and analog(1) <1500
         #else:
-        if analog(LTOPHAT) > 2000:
+        if analog(LTOPHAT) > 2300:
             _drive(30, 35)
-            print ("On white")
-        else:
+            print ("On black turn left")
+        elif analog(LTOPHAT)<1700:
             _drive(35, 30)
-            print("On black")
+            print("On White turn right")
+        else:
+            _drive(30,30)
+            print ("going straight")
+
         msleep(10)
     freeze_motors()
 

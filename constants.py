@@ -42,7 +42,7 @@ armDown = 1850
 botguyHover = 1300
 
 cowDown = 1800
-cowArmStart = 345
+cowArmStart = 600
 cowArmTurn = 1270
 cowArmDrop = 1550
 
