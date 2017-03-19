@@ -66,13 +66,14 @@ def seeLineTwo():
 
 #Checks to see if all of the servos, motors, and sensors are working properly
 def start_up_test():
+    set_servo_position(c.servoCowArm, c.cowArmDown)
     enable_servos()
+    move_servo(c.servoCowArm, c.cowArmStart, 10)
     pivot_left(45, 25)
-    msleep(1000)
+    msleep(500)
     pivot_left(-45, 25)
-    msleep(1000)
+    msleep(500)
     move_servo(c.servoArm, c.armUp, 10)
-    move_servo(c.cowArm, c.cowArmStart, 10)
     move_servo(c.servoClaw, c.clawOpen, 10)
     move_servo(c.servoCowClaw, c.cowClawOpen, 10)
     msleep(500)

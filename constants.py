@@ -25,6 +25,7 @@ isClone = w.digital(CLONE_SWITCH)
 
 # Servos
 servoArm = 0
+servoCowArm = 1
 servoClaw = 2
 servoCowClaw = 3
 
@@ -39,7 +40,7 @@ armDown = 1850
 armBotguyHover = 1300
 
 #Cow Arm values
-cowDown = 1800
+cowArmDown = 1800
 cowArmStart = 600
 cowArmTurn = 1270
 cowArmDrop = 1550
@@ -61,6 +62,7 @@ frontLineFollowerGrey = 1300
 if isClone:
     # Servos
     servoArm = 0
+    servoCowArm = 1
     servoClaw = 2
     servoCowClaw = 3
 
@@ -77,7 +79,7 @@ if isClone:
     armBotguyHover = 1300
 
     # Cow Arm values
-    cowDown = 1800
+    cowArmDown = 1800
     cowArmStart = 600
     cowArmTurn = 1270
     cowArmDrop = 1550

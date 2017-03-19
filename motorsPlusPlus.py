@@ -107,7 +107,7 @@ def arc_radius(angle, turnRadius, speed):  # Turns the robot "angle" degrees by 
         print smallTicks
         print largeTicks
         print smallTicks / largeTicks
-        print smallSpeed# Drives while "testFunction" returns "state" | an example would be: x.drive_condition(50, 50, x.getWait)
+        print smallSpeed
         print largeSpeed
         while _right_ticks() <= largeTicks:
             if (_right_ticks() / largeTicks) == (_left_ticks() / smallTicks):
@@ -116,6 +116,21 @@ def arc_radius(angle, turnRadius, speed):  # Turns the robot "angle" degrees by 
                 _drive(smallSpeed, int(largeSpeed / 1.3))
             if (_left_ticks() / smallTicks) > (_right_ticks() / largeTicks):
                 _drive(int(smallSpeed / 1.3), largeSpeed)
+    else:
+        smallSpeed = int(speed * (smallTicks / largeTicks))
+        largeSpeed = int(speed)
+        print smallTicks
+        print largeTicks
+        print smallTicks / largeTicks
+        print smallSpeed
+        print largeSpeed
+        while _left_ticks() <= largeTicks:
+            if (_left_ticks() / largeTicks) == (_right_ticks() / smallTicks):
+                _drive(largeSpeed, smallSpeed)
+            if (_left_ticks() / largeTicks) > (_right_ticks() / smallTicks):
+                _drive(largeSpeed, int(smallSpeed / 1.3))
+            if (_right_ticks() / smallTicks) > (_left_ticks() / largeTicks):
+                _drive(int(largeSpeed / 1.3), smallSpeed)
     freeze_motors()
     print smallTicks
     print largeTicks
