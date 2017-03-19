@@ -17,10 +17,18 @@ from wallaby import freeze
 from wallaby import set_servo_position
 from wallaby import get_servo_position
 from wallaby import analog
-import drive as d
+from wallaby import enable_servos
 from motorsPlusPlus import rotate
-import wallaby as w
+from motorsPlusPlus import pivot_left
+from motorsPlusPlus import drive_condition
+from motorsPlusPlus import drive_speed
 
+# Servo Constants
+DELAY = 10
+# Loop break timers #
+time = 0  # This represents how long to wait before breaking a loop.
+
+#Causes the robot to stop until the right button is pressed
 def waitForButton():
     print "Press Button..."
     while not digital(c.RIGHT_BUTTON):
@@ -30,6 +38,7 @@ def waitForButton():
     msleep(1000)
 
 
+#Causes the robot to stop
 def DEBUG():
     freeze(c.LMOTOR)
     freeze(c.RMOTOR)
@@ -38,21 +47,44 @@ def DEBUG():
     exit(0)
 
 
+#Causes the robot to stop and hold its position for 5 seconds
 def DEBUGwithWait():
-    freeze(c.LMOTOR)
-    freeze(c.RMOTOR)
-    ao()
-    print 'Program stop for DEBUG\nSeconds: ', seconds() - c.startTime
+    DEBUG()
     msleep(5000)
     exit(0)
 
 
-# Servo Constants
-DELAY = 10
+#Checks if there is a black line under the left tophat
+def seeLineOne():
+    return analog(0) < 2000
+
+
+#Checks is there is a black line under the right tophat
+def seeLineTwo():
+    return analog(1) > 2000
+
+
+#Checks to see if all of the servos, motors, and sensors are working properly
+def start_up_test():
+    enable_servos()
+    pivot_left(45, 25)
+    msleep(1000)
+    pivot_left(-45, 25)
+    msleep(1000)
+    move_servo(c.servoArm, c.armUp, 10)
+    move_servo(c.cowArm, c.cowArmStart, 10)
+    move_servo(c.servoClaw, c.clawOpen, 10)
+    move_servo(c.servoCowClaw, c.cowClawOpen, 10)
+    msleep(500)
+    drive_condition(50, 50, seeLineOne, True)
+    msleep(500)
+    drive_condition(-50, -50, seeLineTwo, True)
+
 
 # Servo Control #
 
-def move_servo(servo, endPos, speed=10):  # Moves a servo with increment "speed".
+# Moves a servo with increment "speed".
+def move_servo(servo, endPos, speed=10):
     # speed of 1 is slow
     # speed of 2000 is fast
     # speed of 10 is the default
@@ -73,7 +105,9 @@ def move_servo(servo, endPos, speed=10):  # Moves a servo with increment "speed"
     set_servo_position(servo, endPos)
     msleep(DELAY)
 
-def move_servo_on_white(servo, endPos, speed=10):  # Moves a servo with increment "speed".
+
+# Moves a servo with increment "speed".
+def move_servo_on_white(servo, endPos, speed=10):
     # speed of 1 is slow
     # speed of 2000 is fast
     # speed of 10 is the default
@@ -91,12 +125,31 @@ def move_servo_on_white(servo, endPos, speed=10):  # Moves a servo with incremen
     for i in range(int(now), int(endPos), int(speed)):
         set_servo_position(servo, i)
         msleep(DELAY)
-        if analog(c.FRONT_TOPHAT) > 1500:
+        if seeWhite():
             rotate(20, 25)
     set_servo_position(servo, endPos)
     msleep(DELAY)
 
-def move_servo_timed(servo, endPos, time):  # Moves a servo over a specific time.
+#Gets the robot to the correct start position
+def position():
+    if c.isClone:
+        drive_speed(-2, 25)
+        drive_speed(2.15, 50)
+        pivot_left(48, 25)
+        drive_speed(.03, 25)
+    else:
+        drive_speed(-1, 15)
+        drive_speed(2.1, 50)
+        pivot_left(49, 25)
+        drive_speed(.03, 25)
+
+
+def seeWhite():
+    return analog(c.FRONT_TOPHAT) > 1500
+
+
+# Moves a servo over a specific time.
+def move_servo_timed(servo, endPos, time):
     if time == 0:
         speed = 2047
     else:
@@ -104,109 +157,11 @@ def move_servo_timed(servo, endPos, time):  # Moves a servo over a specific time
     move_servo(servo, endPos, speed)
 
 
-# Loop break timers #
-
-time = 0  # This represents how long to wait before breaking a loop.
-
-
-def setWait(DELAY):  # Sets wait time in seconds before breaking a loop.
+# Sets wait time in seconds before breaking a loop.
+def setWait(DELAY):
     global time
     time = seconds() + DELAY
 
-
-def getWait():  # Used to break a loop after using "setWait". An example would be: setWiat(10) | while true and getWait(): do something().
+# Used to break a loop after using "setWait". An example would be: setWiat(10) | while true and getWait(): do something().
+def getWait():
     return seconds() < time
-
-def onBlackFront():
-    return w.analog(c.FRONT_TOPHAT) > c.frontLineFollowerGrey
-
-
-def onBlackBack():
-    return w.analog(c.REAR_TOPHAT) > c.frontLineFollowerGrey
-
-
-def onBlackFront():
-    return w.analog(c.FRONT_TOPHAT) > c.frontLineFollowerGrey
-
-def onBlackBack():
-    return w.analog(c.REAR_TOPHAT) > c.frontLineFollowerGrey
-
-def timedLineFollowLeft(time):
-    sec = seconds() + time
-    while seconds() < sec:
-        if onBlackFront():
-            d.driveTimed(20, 90, 20)
-        else:
-            d.driveTimed(90, 20, 20)
-        msleep(10)
-
-
-# Follows black line on right for specified amount of time
-def timedLineFollowRight(time):
-    sec = seconds() + time
-    while seconds() < sec:
-        if not onBlackFront():
-            d.driveTimed(20, 90, 20)
-        else:
-            d.driveTimed(90, 20, 20)
-        msleep(10)
-
-
-def timedLineFollowRightSmooth(time):
-    sec = seconds() + time
-    while seconds() < sec:
-        if not onBlackFront():
-            d.driveTimed(20, 40, 20)
-        else:
-            d.driveTimed(40, 20, 20)
-        msleep(10)
-
-
-def lineFollowRightSmoothCount(amount):
-    count = 0
-    while count < amount:
-        if not onBlackFront():
-            d.driveTimed(10, 30, 10)
-            count = count + 1
-        else:
-            d.driveTimed(30, 10, 10)
-            count = 0
-
-
-def timedLineFollowLeftSmooth(time):
-    sec = seconds() + time
-
-    while seconds() < sec:
-        if onBlackFront():
-            d.driveTimed(20, 40, 20)
-        else:
-            d.driveTimed(40, 20, 20)
-        msleep(10)
-
-
-def timedLineFollowLeftBack(time):  # follows on starboard side
-    sec = seconds() + time
-    while seconds() < sec:
-        if onBlackBack():
-            d.driveTimed(-90, -20, 20)
-        else:
-            d.driveTimed(-20, -90, 20)
-        msleep(10)
-
-
-def crossBlackFront():
-    while not onBlackFront():  # wait for black
-        pass
-    while onBlackFront():  # wait for white
-        pass
-    ao()
-
-
-def crossBlackBack():
-    while not onBlackBack():  # wait for black
-        pass
-    while onBlackBack():  # wait for white
-        pass
-    ao()
-
-

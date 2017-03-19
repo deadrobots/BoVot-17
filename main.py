@@ -1,17 +1,10 @@
 #!/usr/bin/python
 
 import actions as act
-import utils as u
-import constants as c
-import motorsPlusPlus as x
-
 seeding = False
 
 def main():
-
     print "running"
-
-
     act.init()
     act.getBotGuy()
     act.goToCow()
@@ -20,10 +13,8 @@ def main():
     if seeding:
         act.toOtherSide()
         act.driveToCow2()
-
     act.goToTerrace()
     act.scoreOnTerrace()
-
 
 if __name__ == "__main__":
     import os

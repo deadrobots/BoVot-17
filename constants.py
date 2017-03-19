@@ -23,75 +23,76 @@ RIGHT_BUTTON = 13
 
 isClone = w.digital(CLONE_SWITCH)
 
-
 # Servos
 servoArm = 0
-cowArm = 1  #up down
 servoClaw = 2
 servoCowClaw = 3
 
-
-
+#Main Arm Values
 armUp = 1400
 armUpBotguy = 800
-armUpRampBotGuy =1500 #1575
+armUpRampBotGuy = 1500  # 1575
 armUpRampBotGuyLowered = 1800
 armUpLineFollow = 550
 armBotguy = 1800
 armDown = 1850
-botguyHover = 1300
+armBotguyHover = 1300
 
+#Cow Arm values
 cowDown = 1800
 cowArmStart = 600
 cowArmTurn = 1270
 cowArmDrop = 1550
 
+#Botguy Claw Values
 clawClose = 450
 clawOpen = 2000
 
-cowClawOpen =1800
-cowClawPush =1900
+#Cow Claw Values
+cowClawOpen = 1800
+cowClawPush = 1900
 cowClawClose = 1000
 cowClawStart = 1400
 
-outriggerMid = 1605
-outriggerSafe = 1250
-outriggerIn = 1950
-outriggerOut = 370
-outriggerFront = 60 #NEEDS TO BE ADJUSTED FOR PRIME
-
-#Tophat values
+# Tophat values
 FRONT_TOPHAT = 0
 frontLineFollowerGrey = 1300
 
 if isClone:
     # Servos
     servoArm = 0
-    outrigger = 1
     servoClaw = 2
     servoCowClaw = 3
 
+    #Main Arm Values
     armUp = 1500
     armUpBotguy = 900
     armBotguy = 1470
     armDown = 1850
     armUpRampBotGuy = 1500
+    armUpRampBotGuyLowered = 1800
+    armUpLineFollow = 550
+    armBotguy = 1800
+    armDown = 1850
+    armBotguyHover = 1300
 
+    # Cow Arm values
+    cowDown = 1800
+    cowArmStart = 600
+    cowArmTurn = 1270
+    cowArmDrop = 1550
+
+    #Botguy Claw Values
     clawClose = 900
     clawOpen = 1900
 
+    #Cow Claw Values
     cowClawOpen = 1550
+    cowClawPush = 1900
     cowClawClose = 900
     cowClawStart = 1650
 
-    outriggerMid = 1605
-    outriggerSafe = 1250
-    outriggerIn = 1800
-    outriggerOut = 508
-    outriggerFront = 0
-    #outriggerOutLess = 550
-    outriggerInMore = 1900
-    outriggerLineFollow = 1580
+
 
     # Tophat values
     FRONT_TOPHAT = 0
