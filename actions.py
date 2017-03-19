@@ -261,3 +261,78 @@ def seeLineTwo():
 
 #################################### Merged Code ####################################
 
+def alt_init():
+    print "init"
+    if c.isClone:
+        print "i am clone"
+    else:
+        print "i am prime"
+    u.move_servo(c.servoClaw, c.clawOpen, 100)
+    u.move_servo(c.servoArm, c.armDown, 100)
+    u.move_servo(c.servoCowClaw,c.cowClawOpen,100)
+    u.move_servo(c.cowArm, c.cowDown, 100)
+    enable_servos()
+    # position()
+    u.waitForButton()
+    c.startTime = seconds()
+    u.move_servo(c.servoClaw, c.clawClose, 45)
+    msleep(500)
+    u.move_servo(c.servoArm, c.armUpBotguy, 45)
+    camera_open()
+
+def alt_grabCowAndGo():
+    print "grabCowAndGo"
+    u.move_servo(c.servoCowClaw, c.cowClawClose, 10)
+    u.move_servo(c.cowArm, c.cowArmStart, 10)
+
+def toOtherSide():
+    print "toOtherSide"
+    if c.isClone:
+        x.drive_speed(35, 85)
+    else:
+        x.drive_speed(39, 85)
+
+    x.rotate(-84, 30)
+    x.drive_speed(34, 80)
+    if c.isClone:
+        x.drive_timed(-80, -10, 1.5)
+        u.move_servo(c.cowArm, 1000)
+        x.drive_timed(-80, -10, .8)
+        u.move_servo(c.servoArm, c.armBotguy, 10)
+    else:
+        x.drive_speed(-3, 30)
+        x.pivot_right(45, 30)
+        u.move_servo(c.servoArm, c.armBotguy, 10)
+        x.drive_timed(-75, -20, 2)
+        u.move_servo(c.cowArm, 1000)
+    x.drive_speed(-20.0, 45)
+    u.move_servo(c.servoArm, c.armUpBotguy, 15)
+    x.drive_speed(-4, 45)
+
+    #u.move_servo(c.servoArm, c.armBotguy, 10)
+    x.pivot_right(90, 100)
+
+    u.waitForButton()
+    x.pivot_right(43, 60)
+    x.drive_speed(7.5, 30)
+    x.drive_speed(-24, 50)
+
+def driveToCow2():
+    x.rotate(85, 25)
+    x.drive_speed(-23, 85)
+    #x.drive_timed(-20, -25, 2)
+
+
+def grabCow2AndGo():
+    print "grabCow2AndGo"
+    #x.rotate(-2, 10)
+    u.move_servo(c.servoArm, c.cowDown, 10)
+    msleep(100)
+    u.move_servo(c.servoCowClaw, c.cowClawOpen, 80)
+    msleep(200)
+    x.drive_speed(-10, 80) #was 20
+    msleep(200)
+    x.rotate(2, 10)
+    u.move_servo(c.servoCowClaw, c.cowClawClose, 80)
+    u.move_servo(c.cowArm, c.cowArmTurn, 20)
+    #x.rotate(30, 10)
