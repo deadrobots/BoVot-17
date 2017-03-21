@@ -141,7 +141,7 @@ def position():
     else:
         drive_speed(-1, 15)
         drive_speed(2.1, 50)
-        pivot_left(49, 25)
+        pivot_left(40, 25)     #use to be 49
         drive_speed(.03, 25)
 
 

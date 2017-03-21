@@ -30,15 +30,23 @@ def getBotGuy():
     print "getBotGuy"
     # Get out of start box
 
+    x.drive_speed(31, 100)
+    msleep(50)
+    x.rotate(-38, 50)    #use to be -34
+    x.find_pole()
+    x.drive_speed(1, 40)
+    x.pivot_right(90, 30)
+    x.drive_speed(3, 40)
+
+
+
     # x.drive_speed(15, 100)
-    x.drive_speed(14, 60)
-    x.arc_radius(-55, 5, 100)
-    x.drive_speed(4, 60)
-    print "text"
-    x.arc_radius(100, 14, 100)   #use to be 15
-    x.drive_speed(5, 50)
-
-
+    # x.drive_speed(14, 60)
+    # x.arc_radius(-55, 5, 100)
+    # x.drive_speed(4, 60)
+    # print "text"
+    # x.arc_radius(100, 14, 100)   #use to be 15
+    # x.drive_speed(5, 50)
 
     # msleep(200)
     # if c.isClone:
@@ -56,6 +64,7 @@ def getBotGuy():
     # x.drive_speed(8, 100)  # Check for moving over bump. Possible change for later.
     # x.drive_timed(20, 100, .25)
     # msleep(300)
+
     x.drive_speed(6, -60)
     u.move_servo(c.servoClaw, c.clawOpen, 100)
     u.move_servo(c.servoArm, c.armDown, 20)
@@ -74,8 +83,6 @@ def getBotGuy():
         x.drive_speed(4.5, -60)
     msleep(300)
 
-
-
 # Turns from the aquifer and goes toward the cow
 def goToCow():
     print "goToCow"
@@ -87,13 +94,13 @@ def goToCow():
         u.move_servo(c.servoCowClaw, c.cowClawOpen, 20)
         x.drive_speed(6, -78)
     else:
-        x.pivot_right(-75, 75)  # was 30
+        x.pivot_right(-81, 75)  # was 30
         x.drive_speed(12, 80)  # was 40
+        u.DEBUGwithWait()
         x.rotate(165, 25)  # was 30 and then was 75
         u.move_servo(c.servoCowArm, c.cowArmDown, 20)
         u.move_servo(c.servoCowClaw, c.cowClawOpen, 20)
         x.drive_speed(8, -80)  # was -50
-        x.rotate(6, 25)
         u.waitForButton()
 
 

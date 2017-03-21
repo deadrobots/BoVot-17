@@ -378,3 +378,16 @@ def calibrate3():
 
     #1.07
     # 0.93
+from constants import ET
+def find_pole():
+    value = analog(ET)
+    highest_value = value
+    _drive(30, 32)
+    print value
+    while value > highest_value - 1000:
+        if value > highest_value:
+            highest_value = value
+        msleep(10)
+        value = analog(ET)
+        print value
+    freeze_motors()
