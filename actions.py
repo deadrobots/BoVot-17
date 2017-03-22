@@ -30,9 +30,12 @@ def getBotGuy():
     print "getBotGuy"
     # Get out of start box
 
-    x.drive_speed(31, 100)
+    #x.drive_speed(31, 100)
+    x.arc_radius(5,90,100)
     msleep(50)
-    x.rotate(-38, 50)    #use to be -34
+    #x.rotate(5, 50)    #use to be -34
+    x.drive_speed(25.5,100)
+    x.rotate(-20,75)
     x.find_pole()
     x.drive_speed(1, 40)
     x.pivot_right(90, 30)
@@ -82,6 +85,8 @@ def getBotGuy():
         u.move_servo(c.servoArm, c.armUpBotguy, 10)
         x.drive_speed(4.5, -60)
     msleep(300)
+    u.DEBUG()
+
 
 # Turns from the aquifer and goes toward the cow
 def goToCow():

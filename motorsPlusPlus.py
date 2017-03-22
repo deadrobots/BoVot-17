@@ -13,7 +13,6 @@ from constants import isClone
 from constants import LMOTOR
 from constants import RMOTOR
 from constants import LTOPHAT
-from constants import RTOPHAT
 
 
 from math import pi
@@ -22,18 +21,16 @@ from wallaby import ao
 from wallaby import clear_motor_position_counter
 from wallaby import freeze
 from wallaby import get_motor_position_counter
-from wallaby import get_servo_position
 from wallaby import motor
 from wallaby import msleep
 from wallaby import seconds
 from wallaby import analog
-from wallaby import set_servo_position
 from wallaby import accel_x
 
 # Drive Constants
 INCHES_TO_TICKS = 172#169   #205 - 161     #156#127#50 cm #265
 WHEEL_DISTANCE = 4.25 #205 - 4.25  # Distance between the two wheels
-ADJUST = 1.05 # adjust left wheel counter to fix drift (was 1.05)
+ADJUST = 1.04 # adjust left wheel counter to fix drift (was 1.05)
 
 if isClone:
     # Drive Constants

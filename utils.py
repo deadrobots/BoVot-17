@@ -139,10 +139,10 @@ def position():
         pivot_left(48, 25)
         drive_speed(.03, 25)
     else:
-        drive_speed(-1, 15)
-        drive_speed(2.1, 50)
-        pivot_left(40, 25)     #use to be 49
-        drive_speed(.03, 25)
+        #drive_speed(-1, 15)
+        drive_speed(3.6, 50)
+        rotate(-40, 25)     #use to be 49
+        #drive_speed(.03, 25)
 
 
 def seeWhite():
