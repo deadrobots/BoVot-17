@@ -10,9 +10,12 @@ def main():
     act.goToCow()
     act.findCow()
     act.grabCowAndGo()
+    act.square_up()
+    exit(0)
     if seeding:
         act.toOtherSide()
         act.driveToCow2()
+    act.goToStartBox()
     act.goToTerrace()
     act.scoreOnTerrace()
 

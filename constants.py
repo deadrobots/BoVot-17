@@ -56,7 +56,6 @@ cowClawClose = 1000
 cowClawStart = 1400
 
 # Tophat values
-FRONT_TOPHAT = 0
 frontLineFollowerGrey = 1300
 ET = 5
 
