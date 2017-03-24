@@ -30,14 +30,14 @@ servoClaw = 2
 servoCowClaw = 3
 
 #Main Arm Values
-armUp = 1400
-armUpBotguy = 800
-armUpRampBotGuy = 1500  # 1575
-armUpRampBotGuyLowered = 1800
-armUpLineFollow = 550
-armBotguy = 1800
-armDown = 1850
-armBotguyHover = 1300
+armUp = 900#1400
+armUpBotguy = 300#800
+armUpRampBotGuy = 1000#1500  # 1575
+armUpRampBotGuyLowered = 1300#1800
+armUpLineFollow = 50#550
+armBotguy = 1300#1800
+armDown = 1350#1850
+armBotguyHover = 800#1300
 
 #Cow Arm values
 cowArmDown = 1800

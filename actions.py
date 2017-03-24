@@ -31,14 +31,14 @@ def getBotGuy():
     # Get out of start box
 
     x.arc_radius(5,90,100)
-    x.drive_speed(25,100)
+    x.drive_speed(23,100)
     msleep(100)
     x.rotate(-40,50)     #use to -45
     msleep(100)
     x.find_pole()
     x.drive_speed(1.5, 40)
     x.pivot_right(90, 30)
-    x.drive_speed(4, 40)
+    x.drive_speed(5, 40)
 
     x.drive_speed(6, -60)
     u.move_servo(c.servoClaw, c.clawOpen, 100)
@@ -88,14 +88,14 @@ def findCow():
         camera_update()
         if get_object_count(0) > 0 and get_object_area(0, 0) > 500:
             print("i see something")
-            if get_object_center_x(0, 0) > 100:
+            if get_object_center_x(0, 0) > 110:
                 print "right"
                 count -= 1
                 x.drive_timed(-30, 30, .01)
                 u.setWait(.3)
                 while u.getWait():
                     camera_update()
-            elif get_object_center_x(0, 0) < 95:
+            elif get_object_center_x(0, 0) < 100:
                 print "left"
                 count += 1
                 x.drive_timed(30, -30, .01)
@@ -122,8 +122,7 @@ def square_up():
         else:
             count += 1
             x.drive_timed(30, -30, .01)
-    x.drive_speed(-30, 75)
-    u.DEBUGwithWait()
+    x.drive_speed(-15, 50)
 
 
 #Grabs the blue cow and turns to the middle of the board
@@ -144,7 +143,7 @@ def grabCowAndGo():
 def goToStartBox():
     x.ADJUST = 1.05  # straighter drive, didn't want to mess up earlier values
     x.drive_speed(54, 100)
-    x.drive_condition(100, 100, u.seeBlack, False)
+    x.drive_condition(100, 100, u.seeBlackLeft, False)
     x.pivot_right(45, 50)
     x.drive_speed(5, 50)
     x.pivot_right(45, 50)
@@ -172,17 +171,39 @@ def scoreOnTerrace():
     msleep(500)
     u.move_servo(c.servoCowArm, c.cowArmStart)
     msleep(500)
-    u.move_servo(c.servoArm, c.armUpRampBotGuy)
+    u.move_servo(c.servoArm, c.armUpRampBotGuyLowered)
     msleep(500)
     x.rotate(-38, 25)     #was -35
+    x.drive_speed(1.75, 88)
+    x.pivot_left_condition(100, u.seeBlackRight)
+    u.move_servo(c.servoCowClaw, c.cowClawClose)
     u.move_servo(c.servoCowArm, c.armDown)
     u.move_servo(c.servoCowArm, c.cowArmDown)
     u.move_servo(c.servoCowClaw, c.cowClawPush)
-    x.drive_speed(1.75, 88)
     #x.rotate(-5, 20)
     print "did it work?"
     u.DEBUGwithWait()
 
+
+def jump():
+    # u.set_servo_position(c.servoArm, c.armDown)
+    # u.set_servo_position(c.servoClaw, c.clawOpen)
+    # enable_servos()
+    #
+    # u.waitForButton()
+    # u.set_servo_position(c.servoClaw, c.clawClose)
+    # msleep(300)
+
+    x.drive_speed(28, 100)
+    x.rotate(90, 50)
+    u.move_servo(c.servoArm, c.armUpRampBotGuy, 10)
+    x.drive_speed(-15, 100)
+    x._drive(-100, -100)
+    # u.move_servo(c.servoArm, 1900, 2)
+    set_servo_position(c.servoArm, 0)
+    msleep(3000)
+    x.drive_speed(24, 100)
+    u.DEBUGwithWait()
 
 #################################### Merged Code ####################################
 def alt_init():
@@ -245,6 +266,7 @@ def toOtherSide():
 
 
 def driveToCow2():
+    x.drive_speed(-24, 50)
     x.rotate(85, 25)
     x.drive_speed(-23, 85)
     # x.drive_timed(-20, -25, 2)

@@ -1,20 +1,25 @@
 #!/usr/bin/python
 
 import actions as act
-seeding = False
+from utils import DEBUGwithWait
+seeding = True
 
 def main():
     print "running"
+
+    # act.jump()
+    # DEBUGwithWait()
+
     act.init()
     act.getBotGuy()
     act.goToCow()
     act.findCow()
     act.grabCowAndGo()
     act.square_up()
-    exit(0)
     if seeding:
-        act.toOtherSide()
+        act.jump()
         act.driveToCow2()
+        DEBUGwithWait()
     act.goToStartBox()
     act.goToTerrace()
     act.scoreOnTerrace()

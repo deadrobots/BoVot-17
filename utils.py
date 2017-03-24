@@ -126,7 +126,7 @@ def move_servo_on_white(servo, endPos, speed=10):
     for i in range(int(now), int(endPos), int(speed)):
         set_servo_position(servo, i)
         msleep(DELAY)
-        if seeBlack():
+        if seeBlackLeft():
             rotate(20, 25)
     set_servo_position(servo, endPos)
     msleep(DELAY)
@@ -145,8 +145,11 @@ def position():
         #drive_speed(.03, 25)
 
 
-def seeBlack():
+def seeBlackLeft():
     return analog(c.LTOPHAT) > 1500
+
+def seeBlackRight():
+    return analog(c.RTOPHAT) > 1500
 
 
 # Moves a servo over a specific time.
