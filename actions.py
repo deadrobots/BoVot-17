@@ -81,9 +81,16 @@ count = 0
 
 # Uses the camera to locate the blue cow
 def findCow():
+    turns = 3
+    for _ in range(0, turns):
+        if center_on_cow():
+            break
+        x.rotate(10, 30)
+
+def center_on_cow():
     camera_open()
     global count
-    tries = 100
+    tries = 30
     while tries > 0:
         camera_update()
         if get_object_count(0) > 0 and get_object_area(0, 0) > 500:
@@ -106,12 +113,12 @@ def findCow():
                 print "found it in " + str(100 - tries) + " tries"
                 print(get_object_center_x(0, 0))
                 print(get_object_area(0, 0))
-                break
+                return True
         else:
             print "i see nothing"
             tries -= 1
             msleep(10)
-
+    return False
 
 def square_up():
     global count
@@ -195,15 +202,37 @@ def jump():
     # msleep(300)
 
     x.drive_speed(28, 100)
-    x.rotate(90, 50)
+    x.rotate(90, 50)    #faces wall
     u.move_servo(c.servoArm, c.armUpRampBotGuy, 10)
-    x.drive_speed(-15, 100)
-    x._drive(-100, -100)
+    x.drive_speed(-15, 100) #back wheel over
+    x.drive_speed(3, 50)
+    x._drive(-100, -100)    #drives backwards for...
     # u.move_servo(c.servoArm, 1900, 2)
-    set_servo_position(c.servoArm, 0)
-    msleep(3000)
-    x.drive_speed(24, 100)
-    u.DEBUGwithWait()
+    set_servo_position(c.servoArm, 0)  #shifts gravity
+
+    # count = 0
+    # while not u.seeBlackLeft():
+    #     pass
+    # while count < 3:
+    #     if u.seeBlackLeft():
+    #         count = 0
+    #         print "Saw black"
+    #     else:
+    #         count += 1
+    #         print "Saw whyte"
+    #     msleep(50)
+
+    while magneto_x() < 10:
+        pass
+    while magneto_x() > 0:
+        pass
+    msleep(300)
+
+    #msleep(2000)    #.... this amount of time
+    u.move_servo(c.servoArm, get_servo_position(c.servoArm) + 300)
+    msleep(100)
+    u.move_servo(c.servoArm, get_servo_position(c.servoArm) - 300)
+    x.drive_speed(15, 100)    #squareup  #was 24
 
 #################################### Merged Code ####################################
 def alt_init():
@@ -266,7 +295,8 @@ def toOtherSide():
 
 
 def driveToCow2():
-    x.drive_speed(-24, 50)
-    x.rotate(85, 25)
-    x.drive_speed(-23, 85)
+    x.drive_speed(-22, 50)  #was -24
+    x.rotate(109, 25)   #was 100
+    u.move_servo(c.servoCowArm, c.cowArmStart)
+    x.drive_speed(-25, 85)
     # x.drive_timed(-20, -25, 2)

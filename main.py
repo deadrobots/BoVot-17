@@ -19,6 +19,7 @@ def main():
     if seeding:
         act.jump()
         act.driveToCow2()
+        act.findCow()
         DEBUGwithWait()
     act.goToStartBox()
     act.goToTerrace()
