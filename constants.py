@@ -18,6 +18,8 @@ LTOPHAT = 0
 RTOPHAT = 1
 
 # Digital ports
+LEFT_BUTTON = 0
+RIGHT_BUTTON = 1
 CLONE_SWITCH = 9
 RIGHT_BUTTON = 13
 
@@ -32,7 +34,8 @@ servoCowClaw = 3
 #Main Arm Values
 armUp = 900#1400
 armUpBotguy = 300#800
-armUpRampBotGuy = 1000#1500  # 1575
+armOnRampBotGuy = 1100#1500  # 1575
+armUpRampBotGuy = 860#1500  # 1575
 armUpRampBotGuyLowered = 1300#1800
 armUpLineFollow = 50#550
 armBotguy = 1300#1800
@@ -58,6 +61,7 @@ cowClawStart = 1400
 # Tophat values
 frontLineFollowerGrey = 1300
 ET = 5
+TOPHAT_PIPE = 4
 
 if isClone:
     # Servos

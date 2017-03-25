@@ -26,6 +26,7 @@ from wallaby import msleep
 from wallaby import seconds
 from wallaby import analog
 from wallaby import accel_x
+from wallaby import motor_power
 
 # Drive Constants
 INCHES_TO_TICKS = 172#169   #205 - 161     #156#127#50 cm #265
@@ -50,6 +51,10 @@ def _drive(left, right):  # Moves the robot using motor commands.
 def _stop():  # Turns off all the motors.
     ao()
 
+
+def drive_power(left, right):
+    motor_power(LMOTOR, left)
+    motor_power(RMOTOR, right)
 
 def freeze_motors():  # Locks the motors to reduce drift.
     freeze(LMOTOR)

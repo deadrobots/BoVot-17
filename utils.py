@@ -76,10 +76,22 @@ def start_up_test():
     move_servo(c.servoArm, c.armUp, 10)
     move_servo(c.servoClaw, c.clawOpen, 10)
     move_servo(c.servoCowClaw, c.cowClawOpen, 10)
+
+    print "i need to see something"
+    while analog(c.ET) < 1000:
+        pass
+    print "please, no more"
+    while analog(c.ET) > 1000:
+        pass
+    print "show me again"
+    while analog(c.ET) < 1000:
+        pass
+
     msleep(500)
     drive_condition(50, 50, seeLineOne, True)
     msleep(500)
     drive_condition(-50, -50, seeLineTwo, True)
+
 
 
 # Servo Control #
@@ -151,6 +163,8 @@ def seeBlackLeft():
 def seeBlackRight():
     return analog(c.RTOPHAT) > 1500
 
+def seeBlackRightTime():
+    return analog(c.RTOPHAT) > 1500 and getWait()
 
 # Moves a servo over a specific time.
 def move_servo_timed(servo, endPos, time):
