@@ -8,8 +8,8 @@ import sys
 def isSeeding():
     seeding = False
     while True:
-        print("For seeding press the LEFT (inside) button.")
-        print("For head to head press the RIGHT (outside) button.")
+        print("For SEEDING press the LEFT (inside) button.")
+        print("For HEAD TO HEAD press the RIGHT (outside) button.")
 
         while right_button() or left_button():
             pass
@@ -18,40 +18,44 @@ def isSeeding():
             pass
         if right_button():
             print("\nYou have selected HEAD TO HEAD")
-            print("Press and hold both buttons to confirm your selection...")
+            # print("Press and hold both buttons to confirm your selection...")
             seeding = False
         else:
             print("\nYou have selected SEEDING")
-            print("Press and hold both buttons to confirm your selection...")
+            # print("Press and hold both buttons to confirm your selection...")
             seeding = True
         while right_button() or left_button():
             pass
-        print("Do nothing for 5 seconds to cancel...")
-        start_time = seconds()
-        cont = True
-        while not right_button() or not left_button():
-            if seconds() > start_time + 5:
-                cont = False
-                break
-        if cont:
-            start_time = seconds()
-            print("")
-            while right_button() and left_button():
-                if seconds() > start_time + 3:
-                    print("\n\nOK")
-                    return seeding
-                else:
-                    out = "\r["
-                    progress = (start_time + 3 - seconds()) / 3.0
-                    for _ in range (0, 10-int(progress * 10)):
-                        out += "|"
-                    for _ in range (0, int(progress * 10)):
-                        out += " "
-                    out += "]"
-                    # sys.stdout.write(out)
-                    # sys.stdout.flush()
-                    msleep(10)
-        print("Canceled!\n\n\n")
+        return seeding
+
+        # while right_button() or left_button():
+        #     pass
+        # print("Do nothing for 5 seconds to cancel...")
+        # start_time = seconds()
+        # cont = True
+        # while not right_button() or not left_button():
+        #     if seconds() > start_time + 5:
+        #         cont = False
+        #         break
+        # if cont:
+        #     start_time = seconds()
+        #     print("")
+        #     while right_button() and left_button():
+        #         if seconds() > start_time + 3:
+        #             print("\n\nOK")
+        #             return seeding
+        #         else:
+        #             out = "\r["
+        #             progress = (start_time + 3 - seconds()) / 3.0
+        #             for _ in range (0, 10-int(progress * 10)):
+        #                 out += "|"
+        #             for _ in range (0, int(progress * 10)):
+        #                 out += " "
+        #             out += "]"
+        #             # sys.stdout.write(out)
+        #             # sys.stdout.flush()
+        #             msleep(10)
+        # print("Canceled!\n\n\n")
 
 
     # while True:
@@ -95,7 +99,7 @@ def init():
     u.move_servo(c.servoClaw, c.clawClose, 100)
     u.move_servo(c.servoArm, c.armUpLineFollow, 100)
     u.move_servo(c.servoCowClaw, c.cowClawStart, 100)
-    u.move_servo(c.servoCowArm, c.cowArmStart, 100)
+    u.move_servo(c.servoCowArm, c.cowArmUp, 100)
     # u.position()
     u.wait4light()
     c.startTime = seconds()
@@ -110,12 +114,14 @@ def getBotGuy():
     x.arc_radius(5,90,100)
     x.drive_speed(18,100)
     msleep(100)
-    x.rotate(-55,50)     #use to -45
-    msleep(100)
+    x.rotate(-50,50)     #use to -45
+    # u.move_servo(c.servoCowArm, c.cowArmDown)
+    # msleep(5000)
+    # u.move_servo(c.servoCowArm, c.cowArmUp)
     x.find_pole()
     x.drive_speed(1.5, 40)
     x.pivot_right(90, 30)
-    x.drive_speed(5, 40)
+    x.drive_speed(6, 40) #was 5
 
     x.drive_speed(6, -60)
     u.move_servo(c.servoClaw, c.clawOpen, 100)
@@ -125,12 +131,13 @@ def getBotGuy():
     u.move_servo(c.servoClaw, c.clawClose, 100)  # grab botguy
     msleep(300)
     u.move_servo(c.servoArm, c.armUp, 10)
+    msleep(5000)
     if c.isClone:
         x.drive_speed(5, -40)
         u.move_servo(c.servoArm, c.armUpBotguy, 10)
         x.drive_speed(4.5, -60)
     else:
-        x.drive_speed(6, -40)
+        x.drive_speed(4, -40)    #was 6
         u.move_servo(c.servoArm, c.armUpBotguy, 10)
         x.drive_speed(4.5, -60)
     msleep(300)
@@ -220,7 +227,7 @@ def grabCowAndGo():
     if c.isClone:
         x.drive_speed(-5, 20)
         u.move_servo(c.servoCowClaw, c.cowClawClose, 10)
-        u.move_servo(c.servoCowArm, c.cowArmStart, 10)
+        u.move_servo(c.servoCowArm, c.cowArmUp, 10)
     else:
         msleep(200)
         x.drive_speed(-10, 80)  # was 20
@@ -228,10 +235,10 @@ def grabCowAndGo():
         x.rotate(2, 10)
         u.move_servo(c.servoCowClaw, c.cowClawClose, 40)
         msleep(100)
-        u.move_servo(c.servoCowArm, c.cowArmStart, 20)
+        u.move_servo(c.servoCowArm, c.cowArmUp, 20)
 
 def goToStartBox():
-    x.ADJUST = 1.05  # straighter drive, didn't want to mess up earlier values
+    # x.ADJUST = 1.04 #was 1.05  # straighter drive, didn't want to mess up earlier values
     x.drive_speed(54, 100)
     x.drive_condition(100, 100, u.seeBlackLeft, False)
     x.pivot_right(45, 50)
@@ -239,18 +246,17 @@ def goToStartBox():
     x.pivot_right(45, 50)
     x.drive_speed(17, 80)
     x.drive_speed(-3, 50)
-    x.rotate(-90,50)#x.pivot_left(-90, 85)
+    x.rotate(90,50)#x.pivot_left(-90, 85)
     x.drive_speed(-8, 50)
     u.move_servo(c.servoArm, c.armUpRampBotGuy, 10)
-    u.move_servo(c.servoCowArm, c.cowArmStart, 10)
+    u.move_servo(c.servoCowArm, c.cowArmUp, 10)
 
 #Drives the Robot to the terrace
 def goToTerrace():
-    x.drive_speed(23, 60)
+    x.drive_speed(18, 60)      #was 23
     u.move_servo(c.servoArm, c.armOnRampBotGuy, 10)
     x.line_follow_ramp(37)
     x.line_follow_terrace(12)
-
 
 #Scores Botguy and the blue cow on the terrace
 def scoreOnTerrace():
@@ -261,20 +267,16 @@ def scoreOnTerrace():
     msleep(500)
     u.move_servo(c.servoCowClaw, c.cowClawOpen)
     msleep(500)
-    u.move_servo(c.servoCowArm, c.cowArmStart)
-    msleep(500)
-    u.move_servo(c.servoArm, c.armUpRampBotGuyLowered)
+    u.move_servo(c.servoCowArm, c.cowArmUp)
     msleep(500)
     x.rotate(-38, 25)     #was -35
-    x.drive_speed(1.75, 88)
-    u.setWait(3)
-    x.pivot_left_condition(100, u.seeBlackRightTime)
+    x.pivot_right(-10, 50)    #was -100
+    u.move_servo(c.servoArm, c.armUpRampBotGuyLowered)
     u.move_servo(c.servoCowClaw, c.cowClawClose)
     u.move_servo(c.servoCowArm, c.armDown)
     u.move_servo(c.servoCowArm, c.cowArmDown)
     u.move_servo(c.servoCowClaw, c.cowClawPush)
     #x.rotate(-5, 20)
-    print "did it work?"
     u.DEBUGwithWait()
 
 magneto_ground = 0
@@ -333,7 +335,7 @@ def jump():
 
 
 def driveToCow2():
-    u.move_servo(c.servoCowArm, c.cowArmStart)
+    u.move_servo(c.servoCowArm, c.cowArmUp)
     x.drive_speed(-24, 50)
     x.rotate(92, 25)
     x.drive_speed(-26, 85)
@@ -359,7 +361,7 @@ def grabCowAndGo2():
     if c.isClone:
         x.drive_speed(-5, 20)
         u.move_servo(c.servoCowClaw, c.cowClawClose, 10)
-        u.move_servo(c.servoCowArm, c.cowArmStart, 10)
+        u.move_servo(c.servoCowArm, c.cowArmUp, 10)
     else:
         msleep(200)
         x.drive_speed(-10, 80)  # was 20

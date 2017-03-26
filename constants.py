@@ -44,7 +44,7 @@ armBotguyHover = 800#1300
 
 #Cow Arm values
 cowArmDown = 1800
-cowArmStart = 600
+cowArmUp = 600
 cowArmTurn = 1270
 cowArmDrop = 1550
 
@@ -85,7 +85,7 @@ if isClone:
 
     # Cow Arm values
     cowArmDown = 1800
-    cowArmStart = 600
+    cowArmUp = 600
     cowArmTurn = 1270
     cowArmDrop = 1550
 

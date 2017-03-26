@@ -7,7 +7,7 @@ def main():
     # act.jump()
     # DEBUGwithWait()
 
-    seeding = True # act.isSeeding()
+    seeding = act.isSeeding()
     if seeding:
         print "running SEEDING"
     else:
@@ -28,6 +28,7 @@ def main():
     act.goToStartBox()
     act.goToTerrace()
     act.scoreOnTerrace()
+    DEBUGwithWait()
 
 if __name__ == "__main__":
     import os
