@@ -97,7 +97,7 @@ def init():
     u.move_servo(c.servoCowClaw, c.cowClawStart, 100)
     u.move_servo(c.servoCowArm, c.cowArmStart, 100)
     # u.position()
-    u.waitForButton()
+    u.wait4light()
     c.startTime = seconds()
     camera_open()
 
@@ -108,9 +108,9 @@ def getBotGuy():
     # Get out of start box
 
     x.arc_radius(5,90,100)
-    x.drive_speed(23,100)
+    x.drive_speed(18,100)
     msleep(100)
-    x.rotate(-40,50)     #use to -45
+    x.rotate(-55,50)     #use to -45
     msleep(100)
     x.find_pole()
     x.drive_speed(1.5, 40)
@@ -281,22 +281,38 @@ magneto_ground = 0
 
 def jump():
 
-    # x.drive_speed(26, 100) #was 28
+    x.drive_speed(28, 100) #was 28
+    u.move_servo(c.servoCowArm, c.cowArmTurn)
+    x.rotate(90, 50)    #faces wall
+
+    # u.set_servo_position(c.servoArm, c.armDown)
+    # u.set_servo_position(c.servoClaw, c.clawOpen)
     # u.move_servo(c.servoCowArm, c.cowArmTurn)
-    # x.rotate(90, 50)    #faces wall
+    # enable_servos()
 
-    u.set_servo_position(c.servoArm, c.armDown)
-    u.set_servo_position(c.servoClaw, c.clawOpen)
-    enable_servos()
+    # u.waitForButton()
+    # u.set_servo_position(c.servoClaw, c.clawClose)
+    # msleep(500)
+    # u.set_servo_position(c.servoArm, c.armUpLineFollow)
+    # msleep(300)
 
-    u.waitForButton()
-    u.set_servo_position(c.servoClaw, c.clawClose)
-    msleep(300)
+    x.drive_speed(-12, 80)
 
+    x.drive_power(-50, -50)
+    u.set_servo_position(c.servoArm, c.armBotguyHover)
+    msleep(1500)
 
-    u.move_servo(c.servoArm, c.armUpRampBotGuy, 10)
-    x.drive_speed(-15, 100) #back wheel over
-    while True:
+    x.drive_power(-100, -100)  # drives backwards for...
+    # u.set_servo_position(c.servoCowArm, 1000)
+    # u.move_servo(c.servoArm, 1900, 2)
+    set_servo_position(c.servoArm, 0)  # shifts gravity
+    msleep(2000)
+    # u.set_servo_position(c.servoCowArm, 800)
+    # x.drive_speed(16, 100)
+
+    # u.move_servo(c.servoArm, c.armUpRampBotGuy, 10)
+    # x.drive_speed(-15, 100) #back wheel over
+    while False:
         x.drive_speed(3, 50) #straddle square up
         x.drive_power(-100, -100)    #drives backwards for...
         # u.move_servo(c.servoArm, 1900, 2)

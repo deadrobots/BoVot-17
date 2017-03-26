@@ -49,7 +49,9 @@ def DEBUG():
 
 #Causes the robot to stop and hold its position for 5 seconds
 def DEBUGwithWait():
-    DEBUG()
+    freeze(c.LMOTOR)
+    freeze(c.RMOTOR)
+    ao()
     msleep(5000)
     exit(0)
 
@@ -183,3 +185,45 @@ def setWait(DELAY):
 # Used to break a loop after using "setWait". An example would be: setWiat(10) | while true and getWait(): do something().
 def getWait():
     return seconds() < time
+
+
+def wait4light():
+    while not calibrate(c.STARTLIGHT):
+        pass
+    wait4(c.STARTLIGHT)
+
+from wallaby import a_button_clicked, b_button_clicked
+
+def calibrate(port):
+    print "Press A button with light on"
+    while not a_button_clicked():
+        if digital(13):
+            DEBUG()
+    lightOn = analog(port)
+    print "On value =", lightOn
+    if lightOn > 200:
+        print "Bad calibration"
+        return False
+
+    print "Press B button with light off"
+    while not b_button_clicked():
+        if digital(13):
+            DEBUG()
+    lightOff = analog(port)
+    print "Off value =", lightOff
+    if lightOff < 3000:
+        print "Bad calibration"
+        return False
+
+    if (lightOff - lightOn) < 2000:
+        print "Bad calibration"
+        return False
+    c.startLightThresh = (lightOff - lightOn) / 2
+    print "Good calibration! ", c.startLightThresh
+    return True
+
+
+def wait4(port):
+    print "waiting for light!! "
+    while analog(port) > c.startLightThresh:
+        pass

@@ -4,15 +4,14 @@ import actions as act
 from utils import DEBUGwithWait, waitForButton
 
 def main():
-    act.jump()
-    DEBUGwithWait()
+    # act.jump()
+    # DEBUGwithWait()
 
-    seeding = act.isSeeding()
+    seeding = True # act.isSeeding()
     if seeding:
         print "running SEEDING"
     else:
         print "running HEAD TO HEAD"
-    exit(0)
     act.init()
     act.getBotGuy()
     act.goToCow()

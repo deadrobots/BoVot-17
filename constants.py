@@ -61,7 +61,8 @@ cowClawStart = 1400
 # Tophat values
 frontLineFollowerGrey = 1300
 ET = 5
-TOPHAT_PIPE = 4
+TOPHAT_PIPE = 3
+STARTLIGHT = 4
 
 if isClone:
     # Servos
