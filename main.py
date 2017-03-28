@@ -1,34 +1,38 @@
 #!/usr/bin/python
 
 import actions as act
-from utils import DEBUGwithWait, waitForButton
+from utils import DEBUGwithWait, waitForButton, DEBUG
+import constants as c
 
 def main():
     # act.jump()
     # DEBUGwithWait()
 
-    seeding = act.isSeeding()
-    if seeding:
+    c.seeding = act.isSeeding()
+    if c.seeding:
         print "running SEEDING"
     else:
         print "running HEAD TO HEAD"
     act.init()
     act.getBotGuy()
     act.goToCow()
-    act.findCow()
-    act.grabCowAndGo()
-    act.square_up()
-    if seeding:
+    if c.seeding:
+        act.findCow()
+        act.grabCowAndGo()
+        act.square_up()
         act.jump()
         act.driveToCow2()
         act.findCow()
         act.grabCowAndGo2()
         act.square_up2()
         # DEBUGwithWait()
+    else:
+        act.grabCowAndGo()
+        act.squareUpSideHeadToHead()
     act.goToStartBox()
     act.goToTerrace()
     act.scoreOnTerrace()
-    DEBUGwithWait()
+    DEBUG()
 
 if __name__ == "__main__":
     import os

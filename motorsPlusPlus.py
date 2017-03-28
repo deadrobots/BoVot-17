@@ -306,9 +306,14 @@ def line_follow_ramp (distance):
     ticks = abs(INCHES_TO_TICKS * distance)
     i = 0
     maxSpeed = 60
-    while accel_x() < 0:
+    count = 0
+    while count < 3:
         #if analog(0) <1500 and analog(1) <1500
         #else:
+        if accel_x() < 0:
+            count = 0
+        else:
+            count += 1
         if i == 50:
             maxSpeed = 40
         if analog(LTOPHAT) > 2300:
@@ -384,12 +389,42 @@ from constants import ET
 def find_pole():
     value = analog(ET)
     highest_value = value
-    _drive(30, 32)
-    print value
-    while value > highest_value - 1000:
+    _drive(50, 52)
+    print "new highest: " + str(value)
+    while value > 0.7 * highest_value or highest_value < 1000:
         if value > highest_value:
             highest_value = value
+            print "new highest: " + str(value)
         msleep(10)
         value = analog(ET)
-        print value
+        # print value
+    print "exited on: " + str(value)
     freeze_motors()
+
+from utils import seeBlackLeft, seeBlackRight
+
+def drive_speed_saw_black(inches, speed):  # Drives an exact distance in inches.
+    print "driving exact distance"
+    sawBlack = False
+    if inches < 0:
+        speed = -speed
+    _clear_ticks()
+    ticks = abs(INCHES_TO_TICKS * inches)
+    while _right_ticks() <= ticks:
+        if _right_ticks() == _left_ticks():
+            _drive(speed, speed)
+        if _right_ticks() > _left_ticks():
+            _drive(speed, int(speed / 1.3))
+        if _left_ticks() > _right_ticks():
+            _drive(int(speed / 1.3), speed)
+        if seeBlackRight() or seeBlackLeft():
+            sawBlack = True
+    freeze_motors()
+    print ticks
+    print get_motor_position_counter(RMOTOR)
+    if seeBlackRight() or seeBlackLeft():
+        return 0
+    elif sawBlack:
+        return 1
+    else:
+        return 2

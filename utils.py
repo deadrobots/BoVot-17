@@ -71,29 +71,29 @@ def seeLineTwo():
 def start_up_test():
     set_servo_position(c.servoCowArm, c.cowArmDown)
     enable_servos()
-    move_servo(c.servoCowArm, c.cowArmUp, 10)
+    move_servo(c.servoCowArm, c.cowArmUp, 500)
     pivot_left(45, 25)
-    msleep(500)
+    msleep(250)
     pivot_left(-45, 25)
-    msleep(500)
-    move_servo(c.servoArm, c.armUp, 10)
-    move_servo(c.servoClaw, c.clawOpen, 10)
-    move_servo(c.servoCowClaw, c.cowClawOpen, 10)
+    msleep(250)
+    move_servo(c.servoArm, c.armUp, 500)
+    move_servo(c.servoClaw, c.clawOpen, 500)
+    move_servo(c.servoCowClaw, c.cowClawOpen, 500)
 
     print "i need to see something"
     while analog(c.ET) < 1000:
         pass
-    print "please, no more"
+    print "now i dont"
     while analog(c.ET) > 1000:
         pass
     print "show me again"
     while analog(c.ET) < 1000:
         pass
 
-    msleep(500)
-    drive_condition(50, 50, seeLineOne, True)
-    msleep(500)
-    drive_condition(-50, -50, seeLineTwo, True)
+    msleep(250)
+    drive_condition(100, 100, seeLineOne, True)
+    msleep(250)
+    drive_condition(-100, -100, seeLineTwo, True)
 
 
 
@@ -229,5 +229,9 @@ def calibrate(port):
 
 def wait4(port):
     print "waiting for light!! "
+    if c.seeding:
+        print("SEEDING")
+    else:
+        print("HEAD TO HEAD")
     while analog(port) > c.startLightThresh:
         pass

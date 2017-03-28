@@ -3,6 +3,8 @@ Created on Jan 3, 2016
 @author: graysonelias
 '''
 
+seeding = False
+
 import wallaby as w
 
 # Time
