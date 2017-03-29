@@ -103,7 +103,7 @@ def init():
     else:
         print "i am prime"
     enable_servos()
-    u.start_up_test()
+    # u.start_up_test()
     u.move_servo(c.servoClaw, c.clawClose, 100)
     u.move_servo(c.servoArm, c.armUpLineFollow, 100)
     u.move_servo(c.servoCowClaw, c.cowClawStart, 100)
@@ -131,10 +131,10 @@ def getBotGuy():
     x.pivot_right(93, 60)  #used to be 90
     x.drive_speed(7, 70)
 
-    x.drive_speed(-3.5, 60)  #used to be -6
+    x.drive_speed(-6, 60)  #used to be -6
     u.move_servo(c.servoClaw, c.clawOpen, 100)
     u.move_servo(c.servoArm, c.armDown, 20)
-    x.drive_speed(9, 50)
+    x.drive_speed(10, 50)
     msleep(200)
     u.move_servo(c.servoClaw, c.clawClose, 100)  # grab botguy
     msleep(300)
@@ -181,16 +181,20 @@ def goToCow():
         x.ADJUST = 1.00
         u.move_servo(c.servoCowArm, c.cowArmDown, 20)
         u.move_servo(c.servoCowClaw, c.cowClawOpen, 20)
+        x.rotate(-4, 20)
         x.drive_speed(8, -80)  # was -50
 
 
 def driveToCow2():
     u.move_servo(c.servoCowArm, c.cowArmUp)
-    x.drive_speed(-24, 85)
+    x.drive_speed(-16, 85)
     x.rotate(91, 30)
-    x.drive_speed(-26, 85)
-    x.rotate(-5, 30)
-    # x.drive_timed(-20, -25, 2)
+    x.drive_speed(-20, 85)
+    x.rotate(-90, 30)
+    x.drive_speed(12, 100)
+    x.drive_speed(-12.5, 100)
+    x.rotate(90, 30)
+    # x.drive_speed(-5, 100)
 
 
 count = 0
@@ -253,9 +257,9 @@ def square_up():
             count += 1
             x.drive_timed(30, -30, .01)
     if c.seeding:
-        x.drive_speed(-15, 100)
+        x.drive_speed(-25, 100)
     else:
-        x.drive_speed(-15, 50)
+        x.drive_speed(-20, 100)
 
 
 #Grabs the blue cow and turns to the middle of the board
@@ -268,7 +272,7 @@ def grabCowAndGo():
     else:
         msleep(200)
         if c.seeding:
-            x.drive_speed(-10, 80)  # was 20
+            x.drive_speed(-5, 80)  # was 20
         else:
             x.drive_speed(-5, 80)
         # x.rotate(6, 60)   to be continued...
@@ -423,7 +427,7 @@ def square_up2():
     #    else:
     #        count += 1
     #        x.drive_timed(30, -30, .01)
-    x.drive_speed(-19, 100)
+    x.drive_speed(-20, 100)
 
 
 #Grabs the blue cow and turns to the middle of the board
@@ -431,14 +435,15 @@ def grabCowAndGo2():
     print "grabCowAndGo"
     u.move_servo(c.servoCowArm, c.cowArmDown)
     u.move_servo(c.servoCowClaw, c.cowClawOpen)
+    x.drive_speed(-14, 100)
     if c.isClone:
         x.drive_speed(-5, 20)
         u.move_servo(c.servoCowClaw, c.cowClawClose, 10)
         u.move_servo(c.servoCowArm, c.cowArmUp, 10)
     else:
-        msleep(200)
-        x.drive_speed(-10, 80)  # was 20
-        msleep(200)
+        # msleep(200)
+        # x.drive_speed(-10, 80)  # was 20
+        # msleep(200)
         x.rotate(2, 10)
         u.move_servo(c.servoCowClaw, c.cowClawClose, 40)
         msleep(100)

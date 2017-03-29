@@ -11,7 +11,7 @@
     <option name="ADD_CONTENT_ROOTS" value="true" />
     <option name="ADD_SOURCE_ROOTS" value="true" />
     <module name="BoVot-17" />
-    <option name="SCRIPT_NAME" value="$USER_HOME$/notify.py" />
+    <option name="SCRIPT_NAME" value="$USER_HOME$/Xnotify.py" />
     <option name="PARAMETERS" value="BoVot" />
     <option name="SHOW_COMMAND_LINE" value="false" />
     <method>
