@@ -121,7 +121,7 @@ def getBotGuy():
     x.arc_radius(5,90,100)
     x.drive_speed(18,100)
     msleep(100)
-    x.rotate(-50,50)     #use to -45
+    x.rotate(-47,50)     #use to -45
     # u.move_servo(c.servoCowArm, c.cowArmDown)
     # msleep(5000)
     # u.move_servo(c.servoCowArm, c.cowArmUp)
@@ -177,10 +177,21 @@ def goToCow():
     else:
         x.pivot_right(-81, 75)  # was 30
         x.drive_speed(12, 80)  # was 40
-        x.rotate(172, 25)  # was 165
+        x.rotate(175, 25)  # was 172
+        x.ADJUST = 1.00
         u.move_servo(c.servoCowArm, c.cowArmDown, 20)
         u.move_servo(c.servoCowClaw, c.cowClawOpen, 20)
         x.drive_speed(8, -80)  # was -50
+
+
+def driveToCow2():
+    u.move_servo(c.servoCowArm, c.cowArmUp)
+    x.drive_speed(-24, 85)
+    x.rotate(91, 30)
+    x.drive_speed(-26, 85)
+    x.rotate(-5, 30)
+    # x.drive_timed(-20, -25, 2)
+
 
 count = 0
 
@@ -241,7 +252,10 @@ def square_up():
         else:
             count += 1
             x.drive_timed(30, -30, .01)
-    x.drive_speed(-15, 50)
+    if c.seeding:
+        x.drive_speed(-15, 100)
+    else:
+        x.drive_speed(-15, 50)
 
 
 #Grabs the blue cow and turns to the middle of the board
@@ -257,6 +271,7 @@ def grabCowAndGo():
             x.drive_speed(-10, 80)  # was 20
         else:
             x.drive_speed(-5, 80)
+        # x.rotate(6, 60)   to be continued...
         msleep(200)
         x.rotate(2, 10)
         u.move_servo(c.servoCowClaw, c.cowClawClose, 40)
@@ -271,8 +286,8 @@ def goToStartBox():
         x.drive_speed(20, 100)
     state = x.drive_speed_saw_black(40, 100)
     if state == 0:
-        x.drive_condition(-80, -80, u.seeBlackLeft)
-        x.drive_condition(-80, -80, u.seeBlackRight)
+        x.drive_condition(-100, -100, u.seeBlackLeft)
+        x.drive_condition(-100, -100, u.seeBlackRight)
         x.rotate(45, 50)
         x.drive_speed(16, 50)
         x.rotate(-30, 50)
@@ -287,7 +302,10 @@ def goToStartBox():
     x.pivot_right(-90, 60)
     x.drive_speed(-18, 80)
     x.pivot_left(90, 60)
-    x.drive_speed(-8, 50)
+    if c.seeding:
+        x.drive_speed(-10, 50)
+    else:
+        x.drive_speed(-8, 50)
     u.move_servo(c.servoArm, c.armUpRampBotGuy, 10)
     u.move_servo(c.servoCowArm, c.cowArmUp, 10)
 
@@ -301,28 +319,46 @@ def goToTerrace():
 
 #Scores Botguy and the blue cow on the terrace
 def scoreOnTerrace():
-    msleep(300)
+    # if c.seeding:
+    #     msleep(300)
+    #     u.move_servo(c.servoCowArm, c.cowArmDrop)
+    #     u.move_servo(c.servoCowClaw, c.cowClawOpen)
+    #     u.move_servo(c.servoCowArm, c.cowArmUp)
+    #     x.rotate(15, 65)
+    #     u.move_servo(c.servoCowArm, c.cowArmDown)
+    #     x.rotate(-20, 70)
+    #     x.rotate(-38, 25)  # was -35
+    #     x.pivot_right(-10, 50)  # was -100
+    #     u.move_servo(c.servoArm, c.armUpRampBotGuyLowered)
+    #     u.move_servo(c.servoCowClaw, c.cowClawClose)
+    #     u.move_servo(c.servoCowArm, c.armDown)
+    #     u.move_servo(c.servoCowArm, c.cowArmDown)
+    #     u.move_servo(c.servoCowClaw, c.cowClawPush)
+    # else:
+
+    msleep(100)
     u.move_servo(c.servoCowArm, c.cowArmDrop)
-    msleep(500)
+    msleep(100)
     x.rotate(15, 25)
-    msleep(500)
+    msleep(100)
     u.move_servo(c.servoCowClaw, c.cowClawOpen)
-    msleep(500)
+    x.drive_speed(1.5, 50) # caitlyns code
+    x.drive_speed(-1.5, 50) # caitlyns code
+    msleep(100)
     u.move_servo(c.servoCowArm, c.cowArmUp)
-    msleep(500)
-    x.rotate(-38, 25)     #was -35
+    msleep(100)
+    x.rotate(-38, 50)     #was -35
     x.pivot_right(-10, 50)    #was -100
-    u.move_servo(c.servoArm, c.armUpRampBotGuyLowered)
-    u.move_servo(c.servoCowClaw, c.cowClawClose)
-    u.move_servo(c.servoCowArm, c.armDown)
-    u.move_servo(c.servoCowArm, c.cowArmDown)
-    u.move_servo(c.servoCowClaw, c.cowClawPush)
+    u.move_servo(c.servoArm, c.armUpRampBotGuyLowered, 100)
+    u.move_servo(c.servoCowClaw, c.cowClawClose, 100)
+    u.move_servo(c.servoCowArm, c.cowArmDown, 100)
+    u.move_servo(c.servoCowClaw, c.cowClawPush, 100)
     #x.rotate(-5, 20)
 
 magneto_ground = 0
 
 def jump():
-
+    # msleep(3000)
     x.drive_speed(28, 100) #was 28
     u.move_servo(c.servoCowArm, c.cowArmTurn)
     x.rotate(90, 50)    #faces wall
@@ -377,12 +413,6 @@ def jump():
             u.move_servo(c.servoArm, c.armUpRampBotGuy, 10)
 
 
-def driveToCow2():
-    u.move_servo(c.servoCowArm, c.cowArmUp)
-    x.drive_speed(-24, 60)
-    x.rotate(97, 25)
-    x.drive_speed(-26, 85)
-    # x.drive_timed(-20, -25, 2)
 
 def square_up2():
     #global count
@@ -393,7 +423,7 @@ def square_up2():
     #    else:
     #        count += 1
     #        x.drive_timed(30, -30, .01)
-    x.drive_speed(-19, 60)
+    x.drive_speed(-19, 100)
 
 
 #Grabs the blue cow and turns to the middle of the board
@@ -413,3 +443,5 @@ def grabCowAndGo2():
         u.move_servo(c.servoCowClaw, c.cowClawClose, 40)
         msleep(100)
         u.move_servo(c.servoCowArm, c.cowArmTurn, 20)
+        x.ADJUST = 1.04
+        # msleep(5000)
