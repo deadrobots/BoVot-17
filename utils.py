@@ -206,7 +206,7 @@ def calibrate(port):
     if lightOn > 200:
         print "Bad calibration"
         return False
-
+    msleep(1000)
     print "Press RIGHT button with light off"
     while not right_button():
         pass
