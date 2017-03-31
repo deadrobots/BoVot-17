@@ -429,7 +429,7 @@ def grabCowAndGo2():
     print "grabCowAndGo"
     u.move_servo(c.servoCowArm, c.cowArmDown)
     u.move_servo(c.servoCowClaw, c.cowClawOpen)
-    x.rotate(2, 25)
+    x.rotate(-2, 25)
     x.drive_speed(-8, 100)
     if c.isClone:
         x.drive_speed(-5, 20)
