@@ -126,11 +126,11 @@ def getBotGuy():
     # u.move_servo(c.servoCowArm, c.cowArmDown)
     # msleep(5000)
     # u.move_servo(c.servoCowArm, c.cowArmUp)
-    x.drive_speed(6, 70)
+    x.drive_speed(5, 70)
     x.find_pole()
     x.drive_speed(1.5, 40)
     x.pivot_right(93, 60)  #used to be 90
-    x.drive_speed(7, 70)
+    x.drive_speed(9, 70) # was 7
 
     x.drive_speed(-6, 60)  #used to be -6
     u.move_servo(c.servoClaw, c.clawOpen, 100)
