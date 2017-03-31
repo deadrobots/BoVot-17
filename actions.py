@@ -103,13 +103,14 @@ def init():
     else:
         print "i am prime"
     enable_servos()
-    u.start_up_test()
+    # u.start_up_test()
     u.move_servo(c.servoClaw, c.clawClose, 100)
     u.move_servo(c.servoArm, c.armUpLineFollow, 100)
     u.move_servo(c.servoCowClaw, c.cowClawStart, 100)
     u.move_servo(c.servoCowArm, c.cowArmUp, 100)
     # u.position()
-    u.wait4light()
+    u.waitForButton()
+    # u.wait4light()
     shut_down_in(119.9)
     c.startTime = seconds()
 
@@ -122,16 +123,15 @@ def getBotGuy():
     x.arc_radius(5,90,100)
     x.drive_speed(18,100)
     msleep(100)
-    x.rotate(-47,50)     #use to -45
-    # u.move_servo(c.servoCowArm, c.cowArmDown)
-    # msleep(5000)
-    # u.move_servo(c.servoCowArm, c.cowArmUp)
+    if c.isClone:
+        x.rotate(-57,50)     #use to -45
+    else:
+        x.rotate(-47, 50)
     x.drive_speed(5, 70)
     x.find_pole()
     x.drive_speed(1.5, 40)
     x.pivot_right(93, 60)  #used to be 90
     x.drive_speed(9, 70) # was 7
-
     x.drive_speed(-6, 60)  #used to be -6
     u.move_servo(c.servoClaw, c.clawOpen, 100)
     u.move_servo(c.servoArm, c.armDown, 20)
@@ -139,15 +139,14 @@ def getBotGuy():
     u.move_servo(c.servoClaw, c.clawClose, 100)  # grab botguy
     u.move_servo(c.servoArm, c.armUp, 10)
 
+
     if c.seeding:
         if c.isClone:
             x.drive_speed(5, -40)
-            u.move_servo(c.servoArm, c.armUpBotguy, 10)
-            x.drive_speed(4.5, -60)
         else:
             x.drive_speed(4, -40)  # was 6
-            u.move_servo(c.servoArm, c.armUpBotguy, 10)
-            x.drive_speed(4.5, -60)
+        u.move_servo(c.servoArm, c.armUpBotguy, 10)
+        x.drive_speed(4.5, -60)
     else:
         x.drive_speed(-4, 100)
         u.move_servo(c.servoArm, c.armUpBotguy, 15)
@@ -171,6 +170,7 @@ def goToCow():
         u.move_servo(c.servoCowArm, c.cowArmDown, 20)
         u.move_servo(c.servoCowClaw, c.cowClawOpen, 20)
         x.drive_speed(6, -78)
+        x.rotate(-10, 20)
     else:
         x.pivot_right(-81, 75)  # was 30
         x.drive_speed(12, 80)  # was 40
@@ -181,7 +181,6 @@ def goToCow():
         u.move_servo(c.servoCowClaw, c.cowClawOpen, 20)
         x.rotate(-7, 20)
         x.drive_speed(8, -80)
-
 
 def driveToCow2():
     u.move_servo(c.servoCowArm, c.cowArmUp)
@@ -264,9 +263,10 @@ def square_up():
 def grabCowAndGo():
     print "grabCowAndGo"
     if c.isClone:
-        x.drive_speed(-5, 20)
+        x.drive_speed(-8, 80)
         u.move_servo(c.servoCowClaw, c.cowClawClose, 10)
         u.move_servo(c.servoCowArm, c.cowArmUp, 10)
+        x.ADJUST = 0.98
     else:
         if c.seeding:
             x.drive_speed(-5, 80)  # was 20
@@ -283,7 +283,10 @@ def goToStartBox():
         x.drive_speed(50, 100)
     else:
         x.drive_speed(20, 100)
-    state = x.drive_speed_saw_black(40, 100)
+    if c.isClone:
+        state = x.drive_speed_saw_black(45, 100)
+    else:
+        state = x.drive_speed_saw_black(40, 100)
     if state == 0:
         x.drive_condition(-100, -100, u.seeBlackLeft)
         x.drive_condition(-100, -100, u.seeBlackRight)
@@ -299,12 +302,15 @@ def goToStartBox():
         x.drive_speed(6, 100)
     x.drive_speed(-5, 60)
     x.pivot_right(-90, 60)
-    x.drive_speed(-18, 80)
+    x.drive_speed(-20, 80)
     x.pivot_left(90, 60)
     if c.seeding:
         x.drive_speed(-10, 50)
     else:
-        x.drive_speed(-8, 50)
+        if c.isClone:
+            x.drive_speed(-10, 50)
+        else:
+            x.drive_speed(-8, 50)
     u.move_servo(c.servoArm, c.armUpRampBotGuy, 10)
     u.move_servo(c.servoCowArm, c.cowArmUp, 10)
 

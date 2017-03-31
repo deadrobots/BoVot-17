@@ -74,16 +74,16 @@ if isClone:
     servoCowClaw = 3
 
     #Main Arm Values
-    armUp = 1500
-    armUpBotguy = 900
-    armBotguy = 1470
-    armDown = 1850
-    armUpRampBotGuy = 1500
-    armUpRampBotGuyLowered = 1800
-    armUpLineFollow = 550
-    armBotguy = 1800
-    armDown = 1850
-    armBotguyHover = 1300
+    # armUp = 1500
+    # armUpBotguy = 900
+    # armBotguy = 1470
+    # armDown = 1850
+    # armUpRampBotGuy = 1500
+    # armUpRampBotGuyLowered = 1800
+    # armUpLineFollow = 550
+    # armBotguy = 1800
+    # armDown = 1850
+    # armBotguyHover = 1300
 
     # Cow Arm values
     cowArmDown = 1800
