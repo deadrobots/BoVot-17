@@ -14,6 +14,7 @@
     <option name="SCRIPT_NAME" value="$USER_HOME$/Xnotify.py" />
     <option name="PARAMETERS" value="BoVot" />
     <option name="SHOW_COMMAND_LINE" value="false" />
+    <option name="EMULATE_TERMINAL" value="false" />
     <method>
       <option name="ToolBeforeRunTask" enabled="true" actionId="Tool_External Tools_wallaby-208" />
     </method>
