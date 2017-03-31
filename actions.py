@@ -103,14 +103,14 @@ def init():
     else:
         print "i am prime"
     enable_servos()
-    # u.start_up_test()
+    u.start_up_test()
     u.move_servo(c.servoClaw, c.clawClose, 100)
     u.move_servo(c.servoArm, c.armUpLineFollow, 100)
     u.move_servo(c.servoCowClaw, c.cowClawStart, 100)
     u.move_servo(c.servoCowArm, c.cowArmUp, 100)
     # u.position()
-    u.waitForButton()
-    # u.wait4light()
+    # u.waitForButton()
+    u.wait4light()
     shut_down_in(119.9)
     c.startTime = seconds()
 
