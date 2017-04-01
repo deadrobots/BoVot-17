@@ -77,7 +77,7 @@ if isClone:
     # armUp = 1500
     # armUpBotguy = 900
     # armBotguy = 1470
-    # armDown = 1850
+    armDown = 1400
     # armUpRampBotGuy = 1500
     # armUpRampBotGuyLowered = 1800
     # armUpLineFollow = 550
@@ -96,10 +96,10 @@ if isClone:
     clawOpen = 1900
 
     #Cow Claw Values
-    cowClawOpen = 1550
+    cowClawOpen = 1800
     cowClawPush = 1900
     cowClawClose = 900
-    cowClawStart = 1650
+    cowClawStart = 900
 
 
 

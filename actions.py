@@ -12,7 +12,10 @@ def squareUpSideHeadToHead():
     x.drive_speed(-16, 100)
     msleep(4000)
     x.drive_speed(12, 100)
-    x.rotate(-80, 25)
+    if c.isClone:
+        x.rotate(-90, 25)
+    else:
+        x.rotate(-80, 25)
 
 def isSeeding():
     seeding = False
@@ -129,7 +132,10 @@ def getBotGuy():
         x.rotate(-47, 50)
     x.drive_speed(5, 70)
     x.find_pole()
-    x.drive_speed(1.5, 40)
+    if c.isClone:
+        x.drive_speed(1.5, 40)
+    else:
+        x.drive_speed(1, 40)
     x.pivot_right(93, 60)  #used to be 90
     x.drive_speed(9, 70) # was 7
     x.drive_speed(-6, 60)  #used to be -6
@@ -172,14 +178,14 @@ def goToCow():
         x.drive_speed(6, -78)
         x.rotate(-10, 20)
     else:
-        x.pivot_right(-81, 75)  # was 30
+        x.pivot_right(-78, 75)  # was 30
         x.drive_speed(12, 80)  # was 40
         x.rotate(175, 25)  # was 172
         if c.seeding:
             x.ADJUST = 1.00
         u.move_servo(c.servoCowArm, c.cowArmDown, 20)
         u.move_servo(c.servoCowClaw, c.cowClawOpen, 20)
-        x.rotate(-7, 20)
+        x.rotate(-5, 20)
         x.drive_speed(8, -80)
 
 def driveToCow2():
